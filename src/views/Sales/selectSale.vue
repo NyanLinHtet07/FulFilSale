@@ -3,12 +3,12 @@
        
             <div class=" flex justify-center mt-10">
           
-                 <div class="px-4 py-3 mx-4 mt-3 mb-7 w-auto md:w-2/5 rounded-lg shadow-md bg-white bg-opacity-30 text-gray-700
+                 <div class="px-4 py-3 mx-4 my-3 w-auto md:w-2/5 rounded-lg shadow-md bg-white bg-opacity-30 text-gray-700
                          backdrop-blur-lg backdrop-filter
-                         hover:shadow-xl hover:text-green-800 hover:border-2 hover:border-emerald-400/40 transition duration-300 ">
+                         hover:shadow-xl hover:text-green-800 hover:border-2 hover:border-emerald-400/40 transition duration-300">
                     
                     <h2 class=" text-xl font-bold my-3">WholeSales</h2>
-                    <router-link to="/wholesales" class="bg-emerald-600/70 text-gray-100 rounded-xl mx-3 my-3 mt-9 px-3 py-2 drop-shadow-md">
+                    <router-link to="/wholesales" class="bg-emerald-600 text-gray-100 rounded-xl mx-3 my-3 mt-9 px-3 py-2 drop-shadow-md">
                          Click 
                     </router-link>
             </div>
@@ -18,7 +18,7 @@
                          hover:shadow-xl hover:text-green-800 hover:border-2 hover:border-emerald-400/40 transition duration-300 ">
                     
                     <h2 class=" text-xl font-bold my-3">RetailSales</h2>
-                    <router-link to="/retailsales" class="bg-emerald-600/70 text-gray-100 rounded-xl mx-3 my-3 px-3 py-2 drop-shadow-md">
+                    <router-link to="/retailsales" class="bg-emerald-600 text-gray-100 rounded-xl mx-3 my-3 px-3 py-2 drop-shadow-md">
                          Click 
                     </router-link>
             </div>
