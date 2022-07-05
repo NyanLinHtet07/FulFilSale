@@ -1,42 +1,72 @@
 <template>
     <master-layout pageTitle="WholeSales">
-         <!-- <Loader class=""/> -->
-         <!-- <div class=" inline">
+         <Loader class="" v-if="loading"/>
         
-            <div class=" bg-white/60 w-auto backdrop-blur-sm backdrop-filter py-3 px-2 rounded mx-3">
-                <div class="flex justify-between mb-2 w-full">
-                    <div>
-                        <bar-icon class=" text-stone-700"></bar-icon>
-                    </div>
-                    <div class="flex">
-                        <person-icon class=" mx-2 text-emerald-600"></person-icon> 
-                        <cart-icon class="mx-2 text-slate-800"></cart-icon> 
-                        <cancel-icon class="mx-2 text-red-800"></cancel-icon>
-                    </div>
-                </div>
-                    <input type="search" name="" id="" class=" w-5/6 rounded-lg drop-shadow-lg py-2 px-3" placeholder=" Search ..." />
-                </div>
-         </div> -->
        
         
-       <div class=" mt-6 mx-2 flex h-fit">
-           <div class=" w-2/5 mx-1">
-                  <input type="search"  v-model="searchItem" autocomplete="off" class=" w-5/6 rounded-lg drop-shadow-lg py-2 px-3 mb-3" placeholder=" Search ..." />
-
-                <div class=" grid grid-cols-4 gap-2 mx-auto">
-                    
-                         <div  v-for=" data in filteredItems" :key="data.id" @click="addProduct(data)" class="w-auto col-span-2 px-3 py-2 bg-white/70 backdrop-blur-sm backdrop-filter rounded-lg shadow-sm hover:shadow-xl transition duration-500 ease-in-out">
-                             <img :src="`https://fulfilmm.com/product_picture/` + data.image" class=" object-contain w-28 h-28 rounded-xl px-2 py-1 mx-auto"/>
-                            <p>{{data.variant.product_name}}</p>
-                         </div>
-
-                   
-                   
+       <div class=" mt-6 mx-2 flex" v-else>
+           <div class=" w-2/5 h-auto mx-1">
+                <div class=" my-2">
+                    <button  @click="openItems" class=" text-xs px-3 py-1 mx-2 rounded-lg shadow-md text-white bg-emerald-500/70"> Products</button>
+                    <button @click="openFoc" class="  text-xs px-3 py-1 mx-2 rounded-lg shadow-md text-white bg-sky-500/70"> Focs </button>
                 </div>
+
+                <div v-if=" openItem">
+                    <input type="search"  v-model="searchItem" autocomplete="off" class=" w-5/6 rounded-lg drop-shadow-lg py-2 px-3 mb-3" placeholder=" Search Products ..." />
+
+                    <div class=" grid grid-cols-4 gap-2 mx-auto">
+                        
+                            <div  v-for=" data in filteredItems" :key="data.id" @click="addProduct(data)" class="w-auto col-span-2 px-3 py-2 bg-white bg-opacity-70 backdrop-blur-lg backdrop-filter rounded-lg shadow-sm hover:shadow-xl transition duration-500 ease-in-out">
+                                <img :src="`https://fulfilmm.com/product_picture/` + data.image" class=" object-contain w-28 h-28 rounded-xl px-2 py-1 mx-auto"/>
+                                <p class=" leading-tight font-semibold">{{data.variant.product_name}} </p>
+                                <p class="text-sm">Code - {{ data.variant.item_code}} </p>
+                                <small> {{ data.show_price}} MMK </small>
+                            </div>
+
+                    
+                    
+                    </div>
+                </div>
+
+                <div v-else>
+                    <input type="search"  v-model="state" autocomplete="off" class=" w-5/6 rounded-lg drop-shadow-lg py-2 px-3 mb-3" placeholder=" Search Focs ..." />
+
+                    <div class=" grid grid-cols-4 gap-2 mx-auto">
+                        
+                            <div  v-for=" data in filteredStates" :key="data.id" @click="addProduct(data)" class="w-auto col-span-2 px-3 py-2 bg-white bg-opacity-70 backdrop-blur-lg backdrop-filter rounded-lg shadow-sm hover:shadow-xl transition duration-500 ease-in-out">
+                                <img :src="`https://fulfilmm.com/product_picture/` + data.image" class=" object-contain w-28 h-28 rounded-xl px-2 py-1 mx-auto"/>
+                                <p class=" leading-tight font-semibold">{{data.variant.product_name}} </p>
+                                <p class="text-sm">Code - {{ data.variant.item_code}} </p>
+                                <small> {{ data.show_price}} MMK </small>
+                            </div>
+
+                    
+                    
+                    </div>
+                </div>
+                
+                
            
            </div>
-           <div class=" w-3/5 mx-1 bg-white/70 p-2 bg-opacity-50 backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg">
-                <table class="table-auto my-1 border-none  w-full bg-white bg-opacity-40">
+
+           <div class=" w-3/5">
+
+           <div class=" text-right my-2">
+                <input type="search" autocomplete="off" v-model="search" class=" w-5/6 rounded-lg drop-shadow-lg py-2 px-3 mx-2" placeholder=" Search Products ...">
+                 <button  type="button" class=" mr-3 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg" v-on:click="toggleModal()" > <CusIcon/> </button>
+
+                <small v-if="! saleData.customer_id" class=" text-sm text-ellipsis text-red-800 font-bold">Please Select Customer Name</small>
+                        <ul v-if="!(search == '')">
+                             <li v-for="data in filteredCustomer" class=" my-2 rounded" :key="data.id" @click="addData(data)" button="true">
+                                <p :value="data"> {{data.name}}</p>
+                            </li> 
+                        </ul>
+                 
+           </div>
+           
+
+           <div class="h-fit mx-1 bg-white/70 p-2 bg-opacity-50 backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg">
+                <table class="table-auto my-1 border-none  w-full bg-white bg-opacity-40  overflow-x-auto">
             <thead class=" border-y border-gray-300/30 bg-white/80">
                 <tr class="text-sm">
                 <th class=" py-2 font-thin">No</th>
@@ -51,6 +81,8 @@
                 </tr>
             </thead>
             <tbody class=" bg-tr">
+
+                <!------------------ for items  -------------------->
                 <tr  v-for="(product,index) in cartItems" :key="product.id" class=" border-y border-gray-200/50 text-sm">
                 <td class=" py-2 pl-3 text-center"> {{index + 1}} </td>
            
@@ -58,7 +90,7 @@
 
                 <td class=" py-2 pl-3 text-center">
                              <div class="dropdown">
-                                    <p v-if=" product.unitId == 0" class=" mt-2"> Select Unit </p>
+                                    <p v-if=" product.unitId == 0"> Select Unit </p>
                                     <p v-else v-for="uni in product.unit" :key="uni.id" class="mt-2">
                                         <span v-if="product.unitId == uni.id"> {{ uni.unit}}</span>    
                                     </p>  
@@ -72,7 +104,7 @@
                 <td class=" py-2 pl-3 text-center">{{ product.price}}</td>
 
                 <td class=" py-2 pl-3 text-center">
-                     <input type="number"  v-model="product.quantity" @keyup="pricing(product.id , product.unitId)" class=" bg-white text-sm" />
+                     <input type="number"  v-model="product.quantity" @keyup="pricing(product.id , product.unitId)" class=" bg-white w-28 py-2 rounded text-center" />
                 </td>
 
                 <td class=" py-2 pl-3 text-center">
@@ -95,10 +127,199 @@
                     </button>
                     </td>
                 </tr>
+
+                <!---------- end ----------------->
+
+                <!----------------- for foc ---------->
+                <tr  v-for="foc in focItems" :key="foc.id" class=" bg-slate-500/20 border-y border-gray-200/50 text-sm">
+                <td class=" py-2 pl-3 text-center"> # </td>
+           
+                <td class=" py-2 pl-3 text-center">{{ foc.variant.product_name}}</td>
+
+                <td class=" py-2 pl-3 text-center">
+                      <select v-model="foc.unitId" 
+                            class="block appearance-none w-full  text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none bg-white" id="grid-state">
+                                            <option v-for=" u in foc.unit" :key="u.id" :value="u.id">
+                                                        <span> {{u.unit}}  </span>
+                                            </option>
+                     </select>
+                </td>
+
+                <td class=" py-2 pl-3 text-center"> foc item </td>
+
+                <td class=" py-2 pl-3 text-center">
+                     <input type="number"  v-model="foc.quantity" @keyup="pricing(product.id , product.unitId)" class=" bg-white w-28 py-2 rounded text-center" />
+                </td>
+
+                <td class=" py-2 pl-3 text-center">
+                    00.00
+                </td>
+
+                <td class=" py-2 pl-3 text-center">00.00</td>
+                 
+                  <td class=" py-2 text-center"> 
+                      <button  @click="removeFoc(foc)" class="p-1 rounded-full bg-red-700/90 drop-shadow-lg shadow-md shadow-red-200 decoration-slate-200 text-white 
+                                  hover:drop-shadow-sm hover:opacity-80 hover:shadow-inner
+                                  transition ease-in-out duration-300"> 
+                                  <DeleteIcon/>
+                    </button>
+                    </td>
+                </tr>
+
               
             </tbody>
+            <tfoot class=" bg-white/70 text-sm font-semibold">
+                <tr>
+                    <td colspan="6" class="text-right"> Total</td>
+                    <td colspan="2" class=""> {{getTotal}} </td>
+                </tr>
+                <tr>
+                   <td colspan="6" class="text-right"> Discount </td>
+                   <td>
+                        <div v-for="cartDis in cartDiscounts" :key="cartDis.id">
+                            <div v-if="cartDis.min_amount < getTotal && cartDis.max_amount > getTotal">
+                                  <select name="" id="" v-model="tax" class=" rounded-md w-3/6 bg-gray-50  px-2 py-2 mx-auto block">
+                                    <option :value="cartDis.rate"> {{cartDis.rate}} </option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                    </td> 
+                    <td>
+                        {{addDis}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="6" class=" text-right"> Tax</td>
+                    <td> 
+                         <select name="" id="" v-model="tax" class=" rounded-md w-3/6 bg-gray-50  px-2 py-2 mx-auto block">
+                                    <option v-for="(t,index) in taxes" :key="index" :value="t.rate"> {{t.name}} </option>
+                                </select>
+                    </td>
+                    <td>
+                        {{addTax}}   
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="6" class=" text-right"> GrandTotal</td>
+                    <td colspan="2"> {{ addTotal }} </td>
+                </tr>
+
+            </tfoot>
+
+
         </table>
            </div>
+           </div>
+
+
+           <!------------------------------------ modal box --------------------------------->
+                <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+                    <div class="relative w-auto my-6 mx-auto max-w-xl">
+                        <!--content-->
+                        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                        <!--header-->
+                        <div class="flex items-start justify-between p-2 border-b border-solid border-slate-200 rounded-t">
+                            <h6>
+                                Add New Customer
+                            </h6>
+                        </div>
+                        <!--body-->
+                        <div class="relative p-6 flex-auto">
+                             <form @submit.prevent="submitCus()">
+                        <div class=" text-left">
+                                      
+                                        <p v-for=" r in regions" :key="r.id" class=" font-bold"> Region - {{r.name}}</p>
+                        </div>
+
+                        <div class=" border-b-2 border-gray-400/30 mb-3">
+                            <input type="text" v-model="formCus.name"  required="required" placeholder=" Enter Name " class=" w-full py-2 px-3 rounded-md bg-slate-200" />
+                            <p v-if="! formCus.name" class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Name Require</p>
+
+                        </div>
+                
+                        <div class="border-b-2 border-gray-400/30 mb-3">
+                          
+                            <input type="text" v-model="formCus.email"  required="required" placeholder="Enter Email" class=" w-full py-2 px-3 rounded-md bg-slate-200"/>
+                            <p v-if="! formCus.email"  class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Email Require</p>
+                        </div>
+                    
+                
+                    
+                <div class="border-b-2 border-gray-400/30 mb-3">
+                   
+                        <input type="text" v-model="formCus.phone"  required="required" placeholder="Enter Phone Number" class=" w-full py-2 px-3 rounded-md bg-slate-200" />
+                        <p v-if="! formCus.phone"  class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Phone Number Require</p>
+                </div>
+
+                    <div class="border-b-2 border-gray-400/30 mb-3">
+                        <label> Shop</label>
+                        <select v-model="formCus.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                            <option v-for="c in companies" :key="c.id" :value=c.id class="text-sm"> {{c.name}}</option>
+                        </select> 
+                        <p v-if="! formCus.company_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Shop</p>
+                    </div>
+                
+                <div class="border-b-2 border-gray-400/30 mb-3">
+                        <label>Customer Type</label>
+                        <select v-model="formCus.customer_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                            <option value="customer" class="text-sm"> Customer </option>
+                        </select>
+                        <p v-if="! formCus.customer_type" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Type</p>
+                </div>
+
+                <div class="border-b-2 border-gray-400/30 mb-3">
+                        <label> Gender</label>
+                        <select v-model="formCus.gender" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                            <option value="male" class=" text-sm"> Male </option>
+                            <option value="female" class=" text-sm"> Female </option>
+                        </select>
+                        <p v-if="! formCus.gender" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Gender</p>
+                </div>
+
+                <div class="border-b-2 border-gray-400/30 mb-3">
+                        <label> Zone</label>
+                        <select v-model="formCus.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                            <option v-for="z in zones" :key="z.id" :value=z.id class="text-sm"> {{z.name}} </option>
+                            
+                        </select>
+                        <small v-if="! formCus.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</small>
+                </div>
+                  <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                            <button class="py-1 px-3  rounded-lg mx-2 bg-red-800 text-white" type="button" v-on:click="toggleModal()">
+                            Close
+                            </button>
+                            <button v-if="! postingCus" class="py-1 px-3 rounded-lg mx-2 bg-green-800 text-white">
+                            Submit
+                            </button>
+
+                             <button type="button" v-else class="bg-indigo-300 rounded-lg mx-3 px-2 py-2" disabled>
+                            <div class=" flex">
+                                <p class=" mr-4 test-sm font-semibold"> Processing... </p>
+                                <svg role="status" class="w-6 h-6 text-gray-200 animate-spin dark:text-gray-600 fill-emerald-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                                </svg>
+                            </div>
+                       
+                    </button>
+
+                        </div>
+
+
+                </form>
+                        </div>
+                        <!--footer-->
+                      
+                        </div>
+                    </div>
+                    </div>
+                    <div v-if="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+
+
+
        </div>
     </master-layout>
    
@@ -106,25 +327,29 @@
 
 <script>
 import DeleteIcon from 'vue-material-design-icons/Delete.vue'
+import CusIcon from 'vue-material-design-icons/AccountMultiplePlus.vue'
 import axios from 'axios'
 import { mapGetters } from "vuex";
 import moment from 'moment'
 
 const url = "mobile_invoice/create";
-//import Loader from '../../components/loaderComponent.vue'
+import Loader from '../../components/loaderComponent.vue'
 export default {
     components:{
-        DeleteIcon
+        DeleteIcon , Loader, CusIcon
     },
 
      data() {
         return {
+            showModal: false,
             posting:false,
+            postingCus: false,
             loading: false,
             test:'',
             openItem: true,
             visiable:false,
-           
+            err:'',
+            
             unitId:'',
             tax:'',
             deli:'',
@@ -145,8 +370,21 @@ export default {
             units:[],
             customers:[],
             zones:[],
+            companies:[],
+            regions:[],
             warehouse:{},
             d:[],
+
+               formCus:{
+                name:'',
+                email:'',
+                company_id:'',
+                phone:'',
+                customer_type:'',
+                gender:'',
+                zone_id:'',
+                //region_id:'',
+            },
 
             saleData: {
                 inv_date: moment().format('YYYY-MM-DD'),
@@ -177,7 +415,24 @@ export default {
  
     methods:{
 
-      
+           toggleModal(){
+                        this.showModal = !this.showModal;
+                        },
+
+            resetCus(){
+            this.formCus = {
+                name:'',
+                email:'',
+                company_id:'',
+                phone:'',
+                customer_type:'',
+                gender:'',
+                zone_id:'',
+                //region_id:'',
+            }
+        },
+
+
 
         pricing(p_id , u_id){
             this.cartItems.map( item => {
@@ -324,6 +579,41 @@ export default {
                
         },
 
+
+         async submitCus(){
+           this.postingCus = true;
+             await axios.post(`api_customers`, {
+                name: this.formCus.name,
+                email: this.formCus.email,
+                company_id: this.formCus.company_id,
+                phone: this.formCus.phone,
+                customer_type: this.formCus.customer_type,
+                gender: this.formCus.gender,
+                zone_id: this.formCus.zone_id,
+                //region_id: this.form.region_id
+            }, {
+            headers: {
+                'Authorization': "Bearer" + localStorage.getItem('token'),
+            },
+            })
+            .then((response) => {
+                     this.err = response.message
+                     this.postingCus = false;
+                     this.resetCus();
+                     this.wholeSales();
+                     window.alert('Hello')
+                    this.showModal = false;
+                     
+                })
+            .catch( error => {
+                console.log(error);
+                this.postingCus = false;
+                //this.showModal = true
+            })
+
+            //console.log(response)
+        },
+
        
       
 
@@ -399,6 +689,8 @@ export default {
                         this.cartDiscounts = res.data.amount_discount
                         this.customers = res.data.allcustomers
                         this.zones = res.data.zone
+                        this.companies = res.data.companies;
+                        this.regions = res.data.region;
                         this.warehouse = res.data.warehouse
                     })
                     .finally(() => this.loading = false)

@@ -12,7 +12,7 @@
                 <div class="text-left my-6">
                     <input type="password" v-model="userInfo.password" class=" w-full rounded py-2 px-3 bg-transparent border-spacing-1 border-b-2 border-emerald-800/50 
                                               drop-shadow-md text-sm" placeholder="Enter Password">
-                </div>
+                 </div>
 
                 <div class=" text-center my-5">
                     <button  type="submit" v-if="! posting" class=" bg-emerald-600/80 text-gray-100 rounded-lg mx-3 px-4 py-2 drop-shadow-md 
