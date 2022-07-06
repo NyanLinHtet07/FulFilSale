@@ -6,9 +6,9 @@
         
        <div class=" mt-6 mx-2 flex" v-else>
            <div class=" w-2/5 h-auto mx-1">
-                <div class=" my-2">
-                    <button  @click="openItems" class=" text-xs px-3 py-1 mx-2 rounded-lg shadow-md text-white bg-emerald-500/70"> Products</button>
-                    <button @click="openFoc" class="  text-xs px-3 py-1 mx-2 rounded-lg shadow-md text-white bg-sky-500/70"> Focs </button>
+                <div class=" text-left ml-4 my-2">
+                    <button  @click="openItems" class=" text-xs px-3 py-1 mx-2 rounded-full shadow-md text-white bg-emerald-500/70"> Products</button>
+                    <button @click="openFoc" class="  text-xs px-3 py-1 mx-2 rounded-full shadow-md text-white bg-sky-500/70"> Focs </button>
                 </div>
 
                 <div v-if=" openItem">
@@ -50,21 +50,53 @@
            </div>
 
            <div class=" w-3/5">
+            <!----------------------- invoice information --------------------->
+              <h3 class=" font-semibold py-2 px-2 text-left"> Invoice information </h3>
+            <div class=" grid grid-cols-4 gap-1 rounded-md px-2 py-1 my-2 bg-white/80">
+                 <!-------------------- invoice information ------------------->
+                      
+                         <div class=" col-span-4 mt-1 text-left">
+                                    <!-- <label  for="title" class="text-sm block"> Add Title </label> -->
+                                        <input type="text" id="title" v-model="saleData.customer_title"  class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/40 w-full" placeholder="Add Title"/>
+                                         <p v-if="! saleData.customer_title" class=" text-xs text-ellipsis text-red-800 font-bold">Title Require</p>
+                         </div>
 
-           <div class=" text-right my-2">
-                <input type="search" autocomplete="off" v-model="search" class=" w-5/6 rounded-lg drop-shadow-lg py-2 px-3 mx-2" placeholder=" Search Products ...">
-                 <button  type="button" class=" mr-3 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg" v-on:click="toggleModal()" > <CusIcon/> </button>
+                         <div class=" col-span-2">
+                              <label  for="inv_date" class="text-sm"> Invoice Date </label>
+                                         <input type="date" id="inv_date" v-model="saleData.inv_date" class=" px-2 py-1 rounded-lg bg-emerald-100/40 w-32" placeholder="invoice date" />
+                         </div>
 
-                <small v-if="! saleData.customer_id" class=" text-sm text-ellipsis text-red-800 font-bold">Please Select Customer Name</small>
-                        <ul v-if="!(search == '')">
-                             <li v-for="data in filteredCustomer" class=" my-2 rounded" :key="data.id" @click="addData(data)" button="true">
-                                <p :value="data"> {{data.name}}</p>
-                            </li> 
-                        </ul>
-                 
-           </div>
-           
+                         <div class=" col-span-2">
+                              <label for="due_date" class=" text-sm"> Due Date </label>
+                                         <input for="due_date" type="date" v-model="saleData.due_date" class="px-2 py-1 rounded-lg bg-emerald-100/40 w-32" placeholder=" due date"/>
+                         </div>
 
+                         <div class=" col-span-2 text-left">
+                             <label  for="method" class="text-sm block"> Select Payment Method </label>
+                                    <select id="method" v-model="saleData.payment_method" class=" px-2 py-1 rounded-lg bg-emerald-100/40 w-32">
+                                        <option v-for="(p,index) in payments"  :key="index" :value="p" class=" bg-white"> {{p}}</option>
+                                    </select>
+                                     <p v-if="! saleData.payment_method" class=" text-xs text-ellipsis text-red-800 font-bold">Please Select Payment Method</p>
+                         </div>
+
+                         <div class=" text-left">
+                             <label  for="type" class="text-sm block"> Select Invoice Type</label>
+                                    <select id="type" v-model="saleData.invoice_type" class=" px-2 py-1 rounded-lg bg-emerald-100/40 w-32">
+                                        <option value="General Invoice"  class=" bg-white"> General Invoice</option>
+                                        <option value=" Cash On Delivery"  class=" bg-white"> Cash On Delivery</option>
+                                    </select>
+                                     <p v-if="! saleData.invoice_type" class=" text-xs text-ellipsis text-red-800 font-bold">Please Select Invoice Type</p>
+                         </div>
+
+                         <div>
+                             <label  for="zone" class="text-sm block"> Select Zone</label>
+                                    <select id="zone" v-model="zone_id" class=" px-2 py-1 rounded-lg bg-emerald-100/40 w-32">
+                                        <option v-for="z in zones" :key="z.id" :value="z.id" class="bg-white"> {{z.name}}</option>
+                                    </select>
+                                     <!-- <p v-if="! zone_id" class=" text-sm text-ellipsis text-red-800 font-bold">Please Select Sale Zone</p> -->
+                         </div>
+            </div>
+                <!------------------- for invoive ------------------------>
            <div class="h-fit mx-1 bg-white/70 p-2 bg-opacity-50 backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg">
                 <table class="table-auto my-1 border-none  w-full bg-white bg-opacity-40  overflow-x-auto">
             <thead class=" border-y border-gray-300/30 bg-white/80">
@@ -117,7 +149,7 @@
                             </div>
                 </td>
 
-                <td class=" py-2 pl-3 text-center">{{ (product.price * product.quantity)-(((product.price*product.quantity)/100)*product.discount) }}</td>
+                <td class=" py-2 text-center">{{ (product.price * product.quantity)-(((product.price*product.quantity)/100)*product.discount) }}</td>
                  
                   <td class=" py-2 text-center"> 
                       <button  @click="removeItem(product)" class="p-1 rounded-full bg-red-700/90 drop-shadow-lg shadow-md shadow-red-200 decoration-slate-200 text-white 
@@ -171,7 +203,7 @@
             <tfoot class=" bg-white/70 text-sm font-semibold">
                 <tr>
                     <td colspan="6" class="text-right"> Total</td>
-                    <td colspan="2" class=""> {{getTotal}} </td>
+                    <td colspan="2"> {{getTotal}} </td>
                 </tr>
                 <tr>
                    <td colspan="6" class="text-right"> Discount </td>
@@ -212,8 +244,80 @@
 
         </table>
            </div>
-           </div>
+           <!------------------end -------------------->
 
+
+
+           <!------------------ for customer ------------------>
+            
+           <div class=" flex justify-between my-2">
+                
+                <div class="w-4/5 mt-2">
+                <input type="search" autocomplete="off" v-model="search" class=" w-full rounded-xl drop-shadow-lg py-2 px-3 mx-2 mb-3" placeholder=" Search Customers ...">
+                <p v-if="! saleData.customer_id" class=" text-xs text-left ml-3 text-ellipsis text-red-800 font-bold">Please Select Customer Name</p>
+                <ul class="" v-if="!(search == '')">
+                             <li v-for="data in filteredCustomer" class=" my-1 text-left rounded px-2 py-1 bg-white hover:shadow-lg transition ease-linear duration-200" :key="data.id" @click="addData(data)" button="true">
+                                <p :value="data"> {{data.name}}</p>
+                            </li> 
+                        </ul>
+                </div>
+
+                <div class=" w-1/5">
+                <button  type="button" class=" mr-3 inline-block mt-3 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > <CusIcon/> </button>
+                </div>
+                 
+           </div>
+           <!--------------end --------------------------->
+
+
+                        
+
+           <!----------------- for external data ----------------->
+           <div class=" py-2 px-3 text-left bg-white/90 rounded-md mb-4">
+            <h4 class=" my-2 text-left font-semibold"> Customer information </h4>
+                <div class=" grid grid-cols-2 gap-1">
+                        <div class="my-1">
+                             <input type="text" id="phone" v-model="saleData.customer_name" placeholder="Customer Name" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" readonly/>
+                              <!-- <label class="text-sm mb-1">Customer  </label>
+                              <h4>{{ saleData.customer_name }}</h4> -->
+                        </div>
+
+                        <div class=" my-1">
+                             <input type="text" id="phone" v-model="saleData.customer_email" placeholder="Customer Email" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" readonly/>
+                            <!-- <label class="text-sm mb-1">Email  </label>
+                             <h4>{{ saleData.customer_email }}</h4> -->
+                        </div>
+                        <div>
+                             <!-- <label for="phone" class="text-sm block"> Add Customer Phone </label> -->
+                            <input type="text" id="phone" v-model="saleData.customer_phone" placeholder="phone number" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full"/>
+                        </div>
+
+                        <div>
+                             <!-- <label for="add" class="text-sm block"> Add Customer Address </label> -->
+                            <input type="text" id="add" v-model="saleData.customer_address" placeholder="Customer Address" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" />
+                             <p v-if="! saleData.customer_address" class=" text-xs text-ellipsis text-red-800 font-bold">Customer Address Require</p>
+                        </div>
+                        
+                       <div>
+                            <!-- <label  for="shipping" class="text-sm block" > Add Shipping Address </label> -->
+                            <input type="text" id="shipping" v-model="saleData.customer_shipping" placeholder="Shipping Address" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full"/>
+                             <p v-if="! saleData.customer_shipping" class=" text-xs text-ellipsis text-red-800 font-bold"> Shipping Address Require </p>
+                         </div>
+
+                         <div>
+                             <!-- <label  for="shipping" class="text-sm block"> Add Description </label> -->
+                                 <input type="text" v-model="saleData.description" placeholder=" Description " class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full"/>
+                         </div>
+
+                        
+           </div>
+        
+           </div>
+            <div class=" text-right my-2 mr-5">
+                            
+                             <button :disabled="posting" type="submit" @click="submitData()" class=" px-2 py-1 w-32 rounded-full bg-emerald-800 text-white" > Submit </button>
+                             <!-- <ion-spinner  name="circles" v-if='posting' class=" mx-3"></ion-spinner> -->
+                        </div>
 
            <!------------------------------------ modal box --------------------------------->
                 <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
@@ -320,7 +424,8 @@
 
 
 
-       </div>
+            </div>
+        </div>
     </master-layout>
    
 </template>
@@ -576,6 +681,7 @@ export default {
                 this.saleData.customer_phone = data.phone;
                 this.saleData.customer_email = data.email;
                 this.saleData.customer_address = data.address;
+                this.search = '';
                
         },
 
