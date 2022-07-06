@@ -63,12 +63,12 @@
 
                          <div class=" col-span-2">
                               <label  for="inv_date" class="text-sm"> Invoice Date </label>
-                                         <input type="date" id="inv_date" v-model="saleData.inv_date" class=" px-2 py-1 rounded-lg bg-emerald-100/40 w-32" placeholder="invoice date" />
+                                         <input type="date" id="inv_date" v-model="saleData.inv_date" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/40 w-32" placeholder="invoice date" />
                          </div>
 
                          <div class=" col-span-2">
                               <label for="due_date" class=" text-sm"> Due Date </label>
-                                         <input for="due_date" type="date" v-model="saleData.due_date" class="px-2 py-1 rounded-lg bg-emerald-100/40 w-32" placeholder=" due date"/>
+                                         <input for="due_date" type="date" v-model="saleData.due_date" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/40 w-32" placeholder=" due date"/>
                          </div>
 
                          <div class=" col-span-2 text-left">
@@ -112,7 +112,7 @@
                 <th class=" py-2 font-thin">Delete</th>
                 </tr>
             </thead>
-            <tbody class=" bg-tr">
+            <tbody class=" bg-transparent">
 
                 <!------------------ for items  -------------------->
                 <tr  v-for="(product,index) in cartItems" :key="product.id" class=" border-y border-gray-200/50 text-sm">
@@ -277,19 +277,19 @@
             <h4 class=" my-2 text-left font-semibold"> Customer information </h4>
                 <div class=" grid grid-cols-2 gap-1">
                         <div class="my-1">
-                             <input type="text" id="phone" v-model="saleData.customer_name" placeholder="Customer Name" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" readonly/>
+                             <input type="text"  v-model="saleData.customer_name" placeholder="Customer Name" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" readonly/>
                               <!-- <label class="text-sm mb-1">Customer  </label>
                               <h4>{{ saleData.customer_name }}</h4> -->
                         </div>
 
                         <div class=" my-1">
-                             <input type="text" id="phone" v-model="saleData.customer_email" placeholder="Customer Email" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" readonly/>
+                             <input type="text" v-model="saleData.customer_email" placeholder="Customer Email" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" readonly/>
                             <!-- <label class="text-sm mb-1">Email  </label>
                              <h4>{{ saleData.customer_email }}</h4> -->
                         </div>
                         <div>
                              <!-- <label for="phone" class="text-sm block"> Add Customer Phone </label> -->
-                            <input type="text" id="phone" v-model="saleData.customer_phone" placeholder="phone number" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full"/>
+                            <input type="text" v-model="saleData.customer_phone" placeholder="phone number" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full"/>
                         </div>
 
                         <div>
@@ -321,7 +321,7 @@
 
            <!------------------------------------ modal box --------------------------------->
                 <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-                    <div class="relative w-auto my-6 mx-auto max-w-xl">
+                    <div class="relative w-auto my-6 mx-auto max-w-2xl w-xl">
                         <!--content-->
                         <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                         <!--header-->

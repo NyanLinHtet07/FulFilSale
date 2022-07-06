@@ -28,6 +28,23 @@ const routes = [
     component:() => import('../views/Sales/retailSales.vue')
   },
 
+  // {
+  //   path:'/customers',
+  //   component:() => import('../views'), 
+  // },
+
+  // {
+  //   path:'/customers/invoices/:id',
+  //   name: 'customer.detail',
+  //   component:() => import('@/pages/CustomerInv.vue'),
+  // },
+
+  {
+    path:'/invoice-detail/:id',
+    name: 'invoice.detail',
+    component:() => import('../views/Sales/invoiceDetail.vue'),
+  },
+
   {
     path: '/about',
     name: 'about',
