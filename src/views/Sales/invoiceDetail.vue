@@ -3,13 +3,13 @@
 
   
             <div v-if="loading">
-                    <!-- <Loader/> --> h
+                    <Loader/> 
             </div>
             <div v-else class=""> 
                 <div v-if=" invoice.cancel == 1">
                     <p class=" text-red-700 font-bold text-xl"> This invoice was canceled</p>
                 </div>
-                <div v-else class=" flex">
+                <div v-else class=" flex mb-3">
                     <button class="mx-2 px-2 py-1 rounded-xl text-sm drop-shadow-md shadow-md shadow-stone-300 bg-stone-500 text-white
                                     hover:bg-stone-600/50 transition duration-200 ease-in-out " 
                         @click="markSent()" :disabled="invoice.mark_sent == 1"> Mark Send </button>
@@ -59,7 +59,7 @@
 
                                       <div class=" mt-3 px-3 ml-5">
 
-                                        <div class="text-lime-900 text-sm">
+                                        <div class=" text-emerald-700 text-sm">
                                             <div class=" font-semibold py-2">
                                             <div class=" my-1 flex">
                                                     <StoreIcon/>
@@ -123,9 +123,9 @@
                                                 <p class="my-1">{{invoice.billing_address}}</p>
                                             </div>
 
-                                    <div class="col-span-2 text-sm text-lime-800">
-                                        <div class=" font-sans"> <span> Invoice Date - </span>  {{moment(invoice.invoice_date).format("MMM Do YYYY")}} </div>
-                                        <div class="font-sans"> <span> Due Date - </span> {{moment(invoice.due_date).format("MMM Do YYYY")}} </div>
+                                    <div class="col-span-2 text-sm text-emerald-600">
+                                        <div class=""> <span> Invoice Date - </span>  {{moment(invoice.invoice_date).format("MMM Do YYYY")}} </div>
+                                        <div class=""> <span> Due Date - </span> {{moment(invoice.due_date).format("MMM Do YYYY")}} </div>
                                     </div>
                                        
                                 </div>
@@ -232,7 +232,7 @@
                     
                     
                                 <div class="">
-                                     <div class=" grid grid-cols-4 gap-1 rounded-md px-2 py-1 my-2 bg-white/80">
+                                     <div class=" grid grid-cols-4 gap-1 rounded-md px-2 py-1 my-2 mx-3 bg-white/90">
                  <!-------------------- invoice information ------------------->
                       
                          <div class=" col-span-4 mt-1 text-left">
@@ -268,7 +268,7 @@
                          </div>
                     </div>
 
-                                    <table class="table-auto px-4 mx-2 w-full py-2 my-3 rounded-md">
+                                    <table class="table-auto px-4 w-full py-2 my-3 rounded-md">
                                             <thead class=" text-center font-bold text-emerald-900 bg-emerald-300 rounded-lg">
                                                 <th> Name </th>
                                                 <th> Unit </th> 
@@ -368,7 +368,7 @@
                                                 
                                                         <td colspan="5" class=" text-right"> Discount </td>
                                                 
-                                                    <td>
+                                                    <td colspan="2">
                                                         <div v-for="cartDis in amount_discount" :key="cartDis.id">
                                                             <div v-if="cartDis.min_amount < getTotal && cartDis.max_amount > getTotal">
                                                             
@@ -646,9 +646,9 @@
                         </div>
 
                         <div class=" text-left grid grid-cols-2 gap-2 mb-2">
-                            <label for=""> Amount </label>
+                            <label for="">Pay Amount </label>
                             <div>
-                                 <input type="text" v-model="due_amt" v-if="invoice.due_amount >= amt" />
+                                 <input type="text" :placeholder="invoice.due_amount" v-model="due_amt" v-if="invoice.due_amount >= due_amt" class=" w-full mx-2 px-2 py-1 rounded" />
 
                                   <input v-else readonly value="Please fill valid amount" class=" text-red-700 font-bold"/>
                             </div>
@@ -698,7 +698,7 @@
                                     <option v-for="cashier in cashiers" :key="cashier.id" :value="cashier.id" class="text-sm"> {{ cashier.name}} </option>
 
                                 </select>
-                                <p v-if="! form.payment_method" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Cashier</p>   
+                                <p v-if="! form.approver_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Cashier</p>   
                        </div>
                       
                 </div>
@@ -711,7 +711,7 @@
                                 <option v-for="category in payment_category" :key="category.id" :value="category.id" class="text-sm"> {{ category.name}} </option>
 
                             </select>
-                            <p v-if="! form.payment_method" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Cashier</p>   
+                            <p v-if="! form.category" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Cashier</p>   
                        </div>
                        
                 </div>
@@ -776,7 +776,7 @@
 import axios from 'axios'
 // import moment from 'moment'
 //import Payment from '../../component/Sale/PayMentComponent.vue'
-//import Loader from '../../component/LoaderComponent.vue'
+import Loader from '../../components/loaderComponent.vue'
 import print from 'print-js'
 import moment from 'moment'
 
@@ -792,7 +792,7 @@ import AddressIcon from 'vue-material-design-icons/MapCheckOutline.vue'
 
 export default {
     components:{
-        StoreIcon,  CallIcon, PhoneIcon,FaxIcon, MailIcon, WebIcon, AddressIcon,
+        StoreIcon,  CallIcon, PhoneIcon,FaxIcon, MailIcon, WebIcon, AddressIcon, Loader
     },
 
     setup(){
@@ -809,8 +809,8 @@ export default {
             date: null ,
             img:'',
             err:'',
-            due_amt:null,
             moment: moment,
+            due_amt:'',
 
             product:{},
             items: [],
@@ -853,6 +853,11 @@ export default {
     },
 
     methods:{
+
+        // d(){
+        //     let r = this.invoice.id
+        //     console.log(r)
+        // },
 
           reset(){
             this.form = {
@@ -1043,13 +1048,7 @@ export default {
 
         },
 
-        d(){
-            this.due_amt = this.invoice.due_amount;
-        },
 
-        
-        
-        
         async submitPayment(){
             var data = new FormData();
            
@@ -1061,7 +1060,7 @@ export default {
             }
 
             else {
-                 data.append('amount', this.due_amount);
+                 data.append('amount', this.due_amt);
             }
            
             data.append('invoice_id', this.invoice.id);
@@ -1184,11 +1183,9 @@ export default {
 
     created() {
         this.Data();
-       // this.d();
+        //this.d();
     },
-    mounted() {
-        this.d();
-    },
+   
 
 }
 </script>

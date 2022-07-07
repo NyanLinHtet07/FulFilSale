@@ -28,16 +28,16 @@ const routes = [
     component:() => import('../views/Sales/retailSales.vue')
   },
 
-  // {
-  //   path:'/customers',
-  //   component:() => import('../views'), 
-  // },
+  {
+    path:'/customers',
+    component:() => import('../views/Customer/customerView.vue'), 
+  },
 
-  // {
-  //   path:'/customers/invoices/:id',
-  //   name: 'customer.detail',
-  //   component:() => import('@/pages/CustomerInv.vue'),
-  // },
+  {
+    path:'/customers/invoices/:id',
+    name: 'customer.detail',
+    component:() => import('../views/Customer/customerDetail.vue'),
+  },
 
   {
     path:'/history',

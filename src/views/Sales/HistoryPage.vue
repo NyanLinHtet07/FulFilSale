@@ -1,31 +1,34 @@
 <template>
-        <master-layout pageTitle=" Sales History">
+        <master-layout pageTitle="Sales History">
         <div v-if="loading">
                 <Loader/>
         </div>
        <div v-else>
-              <input type="search" v-model="search" placeholder=" search invoice ..." animated class=" fixed top-14 bg-white z-20"/> 
+           
+                <input type="search" v-model="search" placeholder=" search invoice ..." class=" w-4/5 rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2" animated /> 
+          
+              
           
         
-                <div class=" mt-20 grid grid-cols-3 gap-3"> 
+                <div class=" grid  md:grid-cols-3 md:gap-3 grid-cols-1 "> 
                     
                     
-                    <div v-for="record in filteredInvoice" :key="record.id" class="my-4">
-                        <div class="text-white bg-emerald-400/60">
+                    <div v-for="record in filteredInvoice" :key="record.id" class="my-2 mx-2 rounded-xl px-2 py-3 shadow-lg transition-shadow duration-400 hover:shadow-sm bg-white/80 backdrop-blur-lg backdrop-filter">
+                        <div class="text-white bg-emerald-600/80 px-2 py-3 rounded-xl">
                             
-                            <h4> Invoice Number - {{ record.invoice_id}} </h4>
+                            <h4 class=" text-left"> Invoice Number - {{ record.invoice_id}} </h4>
                            
                             <!-- <ion-card-subtitle class=" text-gray-700">  Invoice Date - {{moment(record.invoice_date).format("MMM Do YYYY")}}  </ion-card-subtitle>
                             <ion-card-subtitle class=" text-gray-700">  Due Date - {{moment(record.due_date).format("MMM Do YYYY")}}  </ion-card-subtitle> -->
-                            <div class=" flex ion-justify-content-between">
-                                 <p class="text-gray-600 font-bold"> {{record.inv_type}} </p> 
+                            <div class=" flex justify-between">
+                                 <p class="text-slate-50/90 text-sm font-semibold"> {{record.inv_type}} </p> 
                                 <div>
-                                    <p v-if="record.cancel == 1 " class="text-right text-red-800 font-bold"> Canceled</p>
-                                    <p v-else class="text-right text-gray-800 font-bold"> {{record.status}}</p>
+                                    <p v-if="record.cancel == 1 " class="text-right text-red-800 font-bold text-sm"> Canceled</p>
+                                    <p v-else class="text-right text-gray-800 text-sm font-semibold"> {{record.status}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class=" text-gray-700 font-medium">
+                        <div class=" text-gray-700 font-medium text-left ">
                             <div class=" grid grid-cols-2">
                                
                                     <div>
@@ -66,8 +69,8 @@
                                     </div>
                                    
                                </div>
-                            <div class="text-right">   
-                                <router-link class=" px-2 py-1 rounded bg-emerald-700"  :to="`/invoice-detail/${record.id}`"> 
+                            <div class="text-right mt-3">   
+                                <router-link class=" px-3 py-1 rounded-lg drop-shadow-lg bg-emerald-700 text-white my-1 mr-2"  :to="`/invoice-detail/${record.id}`"> 
                                Invoice Detail
                             </router-link>
                             </div>
