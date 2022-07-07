@@ -40,6 +40,11 @@ const routes = [
   // },
 
   {
+    path:'/history',
+    component:() => import('../views/Sales/HistoryPage'),
+  },
+
+  {
     path:'/invoice-detail/:id',
     name: 'invoice.detail',
     component:() => import('../views/Sales/invoiceDetail.vue'),

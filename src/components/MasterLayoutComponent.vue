@@ -20,6 +20,12 @@
                     </router-link>  
                 </div>
 
+                 <div class="border-b-2 border-gray-200 py-2">
+                   <router-link to='/history' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <CartIcon class=" ml-2 mr-5"/> <p> Sale History </p>
+                    </router-link>  
+                </div>
+
                 <!-- <div class>
                      <router-link to="/about"  class="flex justify-start"> About</router-link>
                 </div> -->
@@ -33,7 +39,7 @@
         </div>
 
 
-        <div class="flex-1">
+        <div class="flex-1 overflow-y-scroll h-screen">
             <div class=" py-3 px-2 rounded-md bg-white/80 backdrop-blur-lg bg-opacity-40 mb-2  mt-1 mx-2
                          w-auto border-2 border-emerald-200/20 flex justify-between">
                      <button  @click=" showSidebar = !showSidebar" class=" hover:bg-slate-200/10 hover:rounded-full hover:drop-shadow-lg hover:transition hover:delay-200 p-2">  <MenuIcon/> </button>

@@ -5,7 +5,7 @@
             <div v-if="loading">
                     <!-- <Loader/> --> h
             </div>
-            <div v-else> 
+            <div v-else class=""> 
                 <div v-if=" invoice.cancel == 1">
                     <p class=" text-red-700 font-bold text-xl"> This invoice was canceled</p>
                 </div>
@@ -408,7 +408,7 @@
             <!-------------------- customer data ----------------------------------------->
              <div class=" flex justify-between my-2">
                 
-                <div class="w-4/5 mt-2">
+                <!-- <div class="w-4/5 mt-2">
                 <input type="search" autocomplete="off" v-model="search" class=" w-full rounded-xl drop-shadow-lg py-2 px-3 mx-2 mb-3" placeholder=" Search Customers ...">
                 <p v-if="! (search == '')" class=" text-xs text-left ml-3 text-ellipsis text-red-800 font-bold">Please Select Customer Name</p>
                 <ul class="" v-if="!(search == '')">
@@ -416,7 +416,7 @@
                                 <p :value="data"> {{data.name}}</p>
                             </li> 
                         </ul>
-                </div>
+                </div> -->
 
                 <!-- <div class=" w-1/5">
                 <button  type="button" class=" mr-3 inline-block mt-3 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > <CusIcon/> </button>
@@ -439,16 +439,15 @@
 
                         <div class=" my-1">
                              <input type="text" v-model="invoice.email"  class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" readonly/>
-                            <!-- <label class="text-sm mb-1">Email  </label>
-                             <h4>{{ saleData.customer_email }}</h4> -->
+                          
                         </div>
                         <div>
-                             <!-- <label for="phone" class="text-sm block"> Add Customer Phone </label> -->
+                            
                             <input type="text" v-model="cus.phone" placeholder="phone number" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full"/>
                         </div>
 
                         <div>
-                             <!-- <label for="add" class="text-sm block"> Add Customer Address </label> -->
+                           
                             <input type="text" id="add" v-model="invoice.customer_address" placeholder="Customer Address" class=" text-sm px-2 py-1 rounded-lg bg-emerald-100/60 w-full" />
                            
                         </div>
@@ -491,7 +490,7 @@
                                     <div v-else>
                                          <img :src= "`https://fulfilmm.com/img/profiles/` + company.logo" class="" />
                                     </div>
-                                    <!-- <img :src= "`https://fulfilmm.com/img/profiles/` + company.logo"> -->
+                                  
                                 
                            
                            
@@ -544,11 +543,7 @@
                                 <tr v-if="product.foc == 0 ">
                                 
                                     <td class="py-3"> {{ product.variant.product_name }}</td>
-                                    <!-- <td class="py-3">                             
-                                                        <div v-for="u in units" :key="u.id">
-                                                            <span v-if="u.id == product.sell_unit">{{u.unit}}</span>
-                                                        </div>
-                                    </td> -->
+                                   
                                     <td class="py-3">
                                         {{product.unit.unit}}
                                     </td>
@@ -562,9 +557,7 @@
                                     <td class="py-3">
                                         {{product.discount_promotion}} %
                                     </td>
-                                    <!-- <td class="py-3">
-                                        {{product.unit_price * product.quantity}}
-                                    </td> -->
+                                   
                                     <td class="py-3">
                                     {{product.total}}
                                     </td>
@@ -637,59 +630,109 @@
                       
                         <!--body-->
                         <div class="relative p-6 flex-auto">
-                             <form @submit.prevent="submitPay()">
-                        <div class=" text-left">
-                                      <label for=""> Title</label>
-                                        <p class=" font-bold"> {{invoice.title}}</p>
+                             <form @submit.prevent="submitPayment()">
+                        <div class=" text-left grid grid-cols-2 gap-2 mb-2">
+                                      <label> Title</label>
+                                        <p class=" ml-2"> {{invoice.title}}</p>
+                        </div>
+                         <div class=" text-left grid grid-cols-2 gap-2 mb-2">
+                            <label for=""> Customer </label>
+                            <p class=" ml-2"> {{invoice.customer.name}}</p>
                         </div>
 
-                        <div>
+                        <div class=" text-left grid grid-cols-2 gap-2 mb-2">
                             <label for=""> Date </label>
-                             <input type="date" class="bg-slate-50 mx-2 px-3 py-2 rounded" v-model="form.transaction_date"></input>
+                             <input type="date" class="bg-slate-50 ml-2 px-3 py-2 rounded" v-model="form.transaction_date"/>
                         </div>
 
-                        <div class=" border-b-2 border-gray-400/30 mb-3">
+                        <div class=" text-left grid grid-cols-2 gap-2 mb-2">
                             <label for=""> Amount </label>
-                            <input v-model="due_amt" v-if=" due_amt <= invoice.due_amount"/>
+                            <div>
+                                 <input type="text" v-model="due_amt" v-if="invoice.due_amount >= amt" />
 
-                            <input v-else readonly value="Please fill valid amount" class=" text-red-700 font-bold"/>
+                                  <input v-else readonly value="Please fill valid amount" class=" text-red-700 font-bold"/>
+                            </div>
+                           
 
                         </div>
                 
                   
-                    <div class="border-b-2 border-gray-400/30 mb-3">
+                    <div class=" text-left grid grid-cols-2 gap-2 mb-2">
                         <label> Currency</label>
-                        <select v-model="formCus.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                            <option v-for="c in companies" :key="c.id" :value=c.id class="text-sm"> {{c.name}}</option>
-                        </select> 
-                        <p v-if="! formCus.company_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Shop</p>
+                        <div>
+                             <select v-model="form.currency" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                            <option value="MMK" class="text-sm"> MMK</option>
+                            </select> 
+                            <p v-if="! form.currency" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Currency</p>
+                        </div>
+                       
                     </div>
                 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label>Customer Type</label>
-                        <select v-model="formCus.customer_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                            <option value="customer" class="text-sm"> Customer </option>
-                        </select>
-                        <p v-if="! formCus.customer_type" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Type</p>
+                <div class=" text-left grid grid-cols-2 gap-2 mb-2">
+                        <label>Advance</label>
+                        <select v-model="form.advance"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                            <option value="on" class="text-sm"> on </option>
+                             <option value="" class="text-sm"> off </option>
+                        </select>   
                 </div>
 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label> Gender</label>
-                        <select v-model="formCus.gender" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                            <option value="male" class=" text-sm"> Male </option>
-                            <option value="female" class=" text-sm"> Female </option>
-                        </select>
-                        <p v-if="! formCus.gender" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Gender</p>
+               
+
+                  <div class=" text-left grid grid-cols-2 gap-2 mb-2">
+                        <label>Payment Method</label>
+                        <div>
+                             <select v-model="form.payment_method"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                            <option v-for="(method,index) in payment_method" :key="index" :value="method" class="text-sm"> {{ method}} </option>
+
+                            </select>
+                            <p v-if="! form.payment_method" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Payment Method</p>   
+                        </div>
+                       
                 </div>
 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label> Zone</label>
-                        <select v-model="formCus.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                            <option v-for="z in zones" :key="z.id" :value=z.id class="text-sm"> {{z.name}} </option>
-                            
-                        </select>
-                        <small v-if="! formCus.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</small>
+                <div class="text-left grid grid-cols-2 gap-2 mb-2">
+                       <label>Cashier</label>
+
+                       <div>
+                              <select v-model="form.approver_id"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                                    <option v-for="cashier in cashiers" :key="cashier.id" :value="cashier.id" class="text-sm"> {{ cashier.name}} </option>
+
+                                </select>
+                                <p v-if="! form.payment_method" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Cashier</p>   
+                       </div>
+                      
                 </div>
+
+                 <div class="text-left grid grid-cols-2 gap-2 mb-2">
+                       <label>Category</label>
+
+                       <div>
+                             <select v-model="form.category"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                                <option v-for="category in payment_category" :key="category.id" :value="category.id" class="text-sm"> {{ category.name}} </option>
+
+                            </select>
+                            <p v-if="! form.payment_method" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Cashier</p>   
+                       </div>
+                       
+                </div>
+
+
+                <div class="text-left grid grid-cols-2 gap-2 mb-2">
+                    <label> Reference</label>
+                    <input type="text" v-model=" form.reference">
+                </div>
+
+                 <div class="text-left grid grid-cols-2 gap-2 mb-2">
+                    <label> Description</label>
+                    <input type="text" v-model=" form.description">
+                </div>
+
+                <div class="text-left grid grid-cols-2 gap-2 mb-2">
+                    <label> File </label>
+                     <input type="file" ref="img" class=" ml-2" @change="onChangeFileUpload()" />
+                </div>
+
+               
                   <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                             <button class="py-1 px-3  rounded-lg mx-2 bg-red-800 text-white" type="button" v-on:click="toggleModal()">
                             Close
@@ -731,10 +774,11 @@
 <script>
 
 import axios from 'axios'
-import moment from 'moment'
+// import moment from 'moment'
 //import Payment from '../../component/Sale/PayMentComponent.vue'
 //import Loader from '../../component/LoaderComponent.vue'
 import print from 'print-js'
+import moment from 'moment'
 
 import StoreIcon from 'vue-material-design-icons/StoreOutline.vue'
 import CallIcon from 'vue-material-design-icons/Phone.vue'
@@ -757,11 +801,17 @@ export default {
 
     data(){
         return{
-             showModal: false,
+            showModal: false,
             disable: true,
             posting:false,
             loading:false,
             visible:false,
+            date: null ,
+            img:'',
+            err:'',
+            due_amt:null,
+            moment: moment,
+
             product:{},
             items: [],
             units:[],
@@ -779,10 +829,23 @@ export default {
 
             search:'',
             filteredCustomer:[],
-            moment: moment,
+            
             cus:{},
 
             res:'',
+
+             form:{
+                transaction_date:moment().format('YYYY-MM-DD'),
+                attachmment:'',
+                category:'',
+                payment_method:'',
+                approver_id:'',
+                currency:'',
+                advance:'',
+                reference:'',
+                description:'',
+
+            }
 
             //pdf
             //pdfGenerator : PDFGenerator,
@@ -790,6 +853,26 @@ export default {
     },
 
     methods:{
+
+          reset(){
+            this.form = {
+                transaction_date:'',
+                attachmment:'',
+                category:'',
+                payment_method:'',
+                approver_id:'',
+                currency:'',
+                advance:'',
+                reference:'',
+                description:'',
+
+            }
+        },
+
+         onChangeFileUpload(){
+            this.form.attachmment= this.$refs.img.files[0];
+        },
+
 
          toggleModal(){
                         this.showModal = !this.showModal;
@@ -958,7 +1041,68 @@ export default {
                   
                   //console.log(response)
 
-        }, 
+        },
+
+        d(){
+            this.due_amt = this.invoice.due_amount;
+        },
+
+        
+        
+        
+        async submitPayment(){
+            var data = new FormData();
+           
+            data.append('customer_id', this.invoice.customer_id);
+            data.append('title', this.invoice.title);
+
+            if( this.due_amt > this.invoice.due_amount){
+                 data.append('amount', 0);
+            }
+
+            else {
+                 data.append('amount', this.due_amount);
+            }
+           
+            data.append('invoice_id', this.invoice.id);
+            data.append('payment_method', this.form.payment_method);
+            data.append('category', this.form.category);
+            data.append('approver_id', this.form.approver_id);
+            data.append('transaction_date', this.form.transaction_date);
+            data.append('currency', this.form.currency);
+            data.append('advance', this.form.advance);
+            data.append('attachment',  this.form.attachmment);
+            data.append('reference', this.form.reference);
+            data.append('description', this.form.description);
+
+             const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data',
+                        'Authorization': "Bearer" + localStorage.getItem('token'),
+                        
+                    }
+                }
+            await axios.post(`revenues`, data, config)
+                    .then( response => {
+                        this.err = response.message;
+                       
+                           this.posting = false;
+                           this.reset();
+                           //this.closeModal();
+                           this.toggleModal = false;
+                           window.location.reload();
+                    })
+                    .catch( error => {
+                        console.log(error);
+                        this.posting = false;
+                    });
+           
+            
+           
+        },
+
+        
+
 
         async destroy(){ 
             if(!confirm('Are You Sure To Cancel')) return;
@@ -992,6 +1136,10 @@ export default {
     },
 
     computed:{
+
+       amt(){
+        return this.invoice.due_amount 
+       },
        
 
             getTotal(){
@@ -1036,7 +1184,12 @@ export default {
 
     created() {
         this.Data();
-    }
+       // this.d();
+    },
+    mounted() {
+        this.d();
+    },
+
 }
 </script>
 

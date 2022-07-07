@@ -4,7 +4,7 @@
         
        
         
-       <div class=" mt-6 mx-2 flex" v-else>
+       <div class=" mt-6 mx-2 mb-3 flex " v-else>
            <div class=" w-2/5 h-auto mx-1">
                 <div class=" text-left ml-4 my-2">
                     <button  @click="openItems" class=" text-xs px-3 py-1 mx-2 rounded-full shadow-md text-white bg-emerald-500/70"> Products</button>
