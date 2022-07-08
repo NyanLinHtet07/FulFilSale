@@ -5,52 +5,67 @@
      </div>
         <div v-else class="">
            
-            <div class=" flex justify-end px-2 py-2  bg-white z-30 w-full">
-                <router-link to="/wholesales"> Wholesales </router-link>
-                <router-link to="/retailsales"> Retails</router-link>
+            <div class=" flex justify-end px-2 py-2  z-30 w-full">
+                <router-link to="/wholesales" class=" px-2 py-1 rounded-2xl bg-rose-500/90 mx-2 text-white drop-shadow-lg shadow-md shadow-rose-200 hover:shadow-sm transition-shadow delay-300">
+                         Wholesales 
+                </router-link>
+                <router-link to="/retailsales" class="px-2 py-1 rounded-2xl bg-slate-500/90 mx-2 text-white drop-shadow-lg shadow-md shadow-slate-200 hover:shadow-sm transition-shadow delay-300"> Retails</router-link>
             </div>
 
 
-            <!------------------  visiable data  ---------------->
+           
 
-            <div class=" mb-14 pb-3">
+           
 
-                    
-                    <input type="search" v-model="search" placeholder=" search customers ..."  class=" bg-white z-30 w-full"/> 
+                    <div class=" flex justify-center mx-2 mt-3 mb-5">
+                         <input type="search" v-model="search" placeholder=" search customers ..."  class=" bg-white rounded-full px-2 w-4/5 h-9 drop-shadow-lg ml-5 mr-3 mt-2"/> 
 
-                    <div class=" mt-40">
-                         <button  type="button" class=" mr-3 inline-block mt-3 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
-                         <PersonAddIcon/>
-                         </button>
-                          
+                        
+                            <button  type="button" class=" mr-5 ml-3 inline-block mt-3 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
+                            <PersonAddIcon/>
+                            </button>
+                      
                     </div>
-                  
-            
-             <div class=" grid  md:grid-cols-3 md:gap-3 grid-cols-1 ">
-                
-                    <div v-for=" cus in filterCustomers" :key="cus.id" class="my-2 mx-2 rounded-xl px-2 py-3 shadow-lg transition-shadow duration-400 hover:shadow-sm bg-white/80 backdrop-blur-lg backdrop-filter">
-                          <div>
-                                <div v-if="cus.profile == null" class="text-sky-700/75 text-3xl px-2 py-2 mb-2 rounded-3xl bg-slate-200">
-                                     <PersonIcon/>
+                   
+
+                     <table class="table-auto border-collapse:separate rounded-xl border-0 border-accent w-5/6 my-6 bg-white bg-opacity-40 backdrop-blur-md mx-auto drop-shadow-sm shadow-2xl shadow-sky-200">
+                        <thead class=" border-y border-gray-300/30">
+                            <tr>
+                            <th class=" py-2 font-thin">No</th>
+                            <th class="py-2 font-thin">Img</th>
+                            <th class=" py-2 font-thin">Name</th>
+                            <th class="py-2 font-thin"> Phone</th>
+                            <th class="py-2 font-thin">Detail</th>
+                            
+                            </tr>
+                        </thead>
+                        <tbody class=" bg-white bg-opacity-60 backdrop-blur-md ">
+                            <tr v-for="(cus,index) in filterCustomers" :key="index" class=" border-y border-gray-200/50 text-sm">
+                            <td class=" py-2 pl-3 text-center">{{index + 1}}</td>
+                            <td class=" py-2 pl-3 text-center">
+                                <div  v-if="cus.profile == null" alt="" class="object-scale-down h-12 w-12 p-1 rounded mx-auto">
+                                    <PersonIcon/>
                                 </div>
-                                
-                                <img v-else :src="`https://fulfilmm.com/img/profiles/` + cus.profile" alt=""/> 
+                                <img :src="`https://fulfilmm.com/img/profiles/` + cus.profile" v-else alt="" srcset="" class="object-scale-down h-12 w-12 p-1 rounded-md mx-auto">
 
-                            </div>
-
-                            <p class=" ml-12"> {{cus.name}} </p>
-
-                            <p class="text-gray-600/90">  {{cus.phone}} </p>
-                            <router-link to="`/customers/invoices/${cus.id}`"> Noop </router-link>
-                    </div>
-               
-             </div>
-                  
-               
-            
-            
-            
-            </div>
+                            </td>
+                            <td class=" py-2 pl-3 text-center">{{cus.name}}</td>
+                            <td class=" py-2 pl-3 text-center text-sm">{{cus.phone}}</td>
+                        
+                            <td class=" py-2 text-center">
+                                <router-link :to="`/customers/invoices/${cus.id}`" class="p-2 text-xs rounded-full bg-emerald-700/90  drop-shadow-lg shadow-md shadow-emerald-200 decoration-slate-200 text-white 
+                                            hover:drop-shadow-sm hover:opacity-80 hover:shadow-inner
+                                            transition ease-in-out duration-300"> 
+                                            View
+                                </router-link> 
+                            </td>
+                            
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+ 
+           
 
             <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
                     <div class="relative w-auto my-6 mx-auto max-w-2xl w-xl">

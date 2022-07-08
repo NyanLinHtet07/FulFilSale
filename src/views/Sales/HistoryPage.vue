@@ -13,8 +13,8 @@
                 <div class=" grid  md:grid-cols-3 md:gap-3 grid-cols-1 "> 
                     
                     
-                    <div v-for="record in filteredInvoice" :key="record.id" class="my-2 mx-2 rounded-xl px-2 py-3 shadow-lg transition-shadow duration-400 hover:shadow-sm bg-white/80 backdrop-blur-lg backdrop-filter">
-                        <div class="text-white bg-emerald-600/80 px-2 py-3 rounded-xl">
+                    <div v-for="record in filteredInvoice" :key="record.id" class="my-2 mx-2 rounded-2xl px-2 py-3 shadow-xl transition-shadow duration-400 hover:shadow-sm bg-white/60 backdrop-blur-lg backdrop-filter">
+                        <div class="text-white bg-emerald-500/90 px-2 py-3 rounded-xl">
                             
                             <h4 class=" text-left"> Invoice Number - {{ record.invoice_id}} </h4>
                            
@@ -70,7 +70,7 @@
                                    
                                </div>
                             <div class="text-right mt-3">   
-                                <router-link class=" px-3 py-1 rounded-lg drop-shadow-lg bg-emerald-700 text-white my-1 mr-2"  :to="`/invoice-detail/${record.id}`"> 
+                                <router-link class=" px-3 py-1 rounded-full drop-shadow-lg bg-emerald-600 text-white my-1 mr-2"  :to="`/invoice-detail/${record.id}`"> 
                                Invoice Detail
                             </router-link>
                             </div>

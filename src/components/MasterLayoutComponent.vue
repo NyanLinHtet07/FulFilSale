@@ -22,13 +22,13 @@
 
                  <div class="border-b-2 border-gray-200 py-2">
                    <router-link to='/history' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
-                     <CartIcon class=" ml-2 mr-5"/> <p> Sale History </p>
+                     <SaleHistoryIcon class=" ml-2 mr-5"/> <p> Sale History </p>
                     </router-link>  
                 </div>
 
                  <div class="border-b-2 border-gray-200 py-2">
                    <router-link to='/customers' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
-                     <CartIcon class=" ml-2 mr-5"/> <p> Customers </p>
+                     <CustomerIcon class=" ml-2 mr-5"/> <p> Customers </p>
                     </router-link>  
                 </div>
 
@@ -72,6 +72,8 @@ import HomeIcon from 'vue-material-design-icons/HomeOutline.vue'
 import MenuIcon from 'vue-material-design-icons/Menu.vue'
 //import CloseIcon from 'vue-material-design-icons/CloseCircleOutline.vue'
 import CartIcon from 'vue-material-design-icons/CartOutline.vue'
+import SaleHistoryIcon from 'vue-material-design-icons/Sale.vue'
+import CustomerIcon from 'vue-material-design-icons/AccountGroup.vue'
 import LogoutIcon from 'vue-material-design-icons/Logout.vue'
 import {ref} from 'vue'
 
@@ -92,7 +94,7 @@ export default {
     },
 
     components:{
-       HomeIcon, MenuIcon,  CartIcon, LogoutIcon
+       HomeIcon, MenuIcon,  CartIcon, LogoutIcon, SaleHistoryIcon, CustomerIcon
     },
 
     methods: {

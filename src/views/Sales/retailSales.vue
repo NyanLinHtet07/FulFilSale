@@ -239,6 +239,20 @@
                     <td colspan="2"> {{ addTotal }} </td>
                 </tr>
 
+                <tr>
+                    <td colspan="6" class=" text-right"> Cash</td>
+                    <td colspan="2"> 
+                         <input type="number"  v-model="cash" class=" bg-gray-200 w-28 py-2 rounded text-center" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class=" text-right"> Cash Back</td>
+                    <td colspan="2"> 
+                        <p v-if=" cash == null"> 0 </p>
+                        <p v-else> {{ cash - addTotal }} </p>
+                    </td>
+                </tr>
+
             </tfoot>
 
 
@@ -446,6 +460,7 @@ export default {
 
      data() {
         return {
+             cash:null,
             showModal: false,
             posting:false,
             postingCus: false,
@@ -774,6 +789,7 @@ export default {
                 this.show();
                  this.reset();
                  this.clearCartData();
+                  this.cash == null;
                }
                
              

@@ -48,7 +48,7 @@
                 <div class=" bg-white rounded-md shadow-md px-3 py-6 mx-3" v-if="! visible">
                             <div class=" flex justify-between mb-5">
                                 <div v-if="company == null">
-                                    <img src="/assets/err1.png" alt="" srcset="" class="object-contain h-48 w-96 mt-10 mr-7">
+                                    <img src="/err1.png" alt="" srcset="" class="object-contain h-48 w-96 mt-10 mr-7">
                                 </div>
                                 <div v-else>
                                     
@@ -479,7 +479,7 @@
                     style="max-width: 800px;margin: auto;padding: 30px;font-size: 16px;line-height: 24px;font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;color: #555;">
                     <table cellpadding="0" cellspacing="0" style="width: 100%;line-height: inherit;text-align: left; border:none;">
                         <div v-if=" company == null">
-                            <img src="/assets/err.png" alt="" srcset="" style=" width:100px; height:100px; margin:auto; padding:20px;">
+                            <img src="/err.png" alt="" srcset="" style=" width:100px; height:100px; margin:auto; padding:20px;">
                         </div>
 
                         <div v-else>
