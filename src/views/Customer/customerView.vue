@@ -15,7 +15,7 @@
 
            
 
-           
+            
 
                     <div class=" flex justify-center mx-2 mt-3 mb-5">
                          <input type="search" v-model="search" placeholder=" search customers ..."  class=" bg-white rounded-full px-2 w-4/5 h-9 drop-shadow-lg ml-5 mr-3 mt-2"/> 

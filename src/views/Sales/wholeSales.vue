@@ -49,10 +49,10 @@
            
            </div>
 
-           <div class=" w-3/5">
+           <div class=" w-3/5 px-2 py-1 rounded-md bg-white/40 backdrop-blur-lg overflow-y-scroll">
             <!----------------------- invoice information --------------------->
               <h3 class=" font-semibold py-2 px-2 text-left"> Invoice information </h3>
-            <div class=" grid grid-cols-4 gap-1 rounded-md px-2 py-1 my-2 bg-white/80">
+            <div class=" grid grid-cols-4 gap-1 rounded-md px-2 py-1 mt-2 mb-4 bg-white/80">
                  <!-------------------- invoice information ------------------->
                       
                          <div class=" col-span-4 mt-1 text-left">
@@ -269,7 +269,7 @@
                 <input type="search" autocomplete="off" v-model="search" class=" w-full rounded-xl drop-shadow-lg py-2 px-3 mx-2 mb-3" placeholder=" Search Customers ...">
                 <p v-if="! saleData.customer_id" class=" text-xs text-left ml-3 text-ellipsis text-red-800 font-bold">Please Select Customer Name</p>
                 <ul class="" v-if="!(search == '')">
-                             <li v-for="data in filteredCustomer" class=" my-1 text-left rounded px-2 py-1 bg-white hover:shadow-lg transition ease-linear duration-200" :key="data.id" @click="addData(data)" button="true">
+                             <li v-for="data in filteredCustomer" class=" my-1 text-center rounded-lg px-2 py-1 bg-slate-100 hover:shadow-lg transition ease-linear duration-200" :key="data.id" @click="addData(data)" button="true">
                                 <p :value="data"> {{data.name}}</p>
                             </li> 
                         </ul>
