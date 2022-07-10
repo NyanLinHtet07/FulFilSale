@@ -1,5 +1,10 @@
 <template>
     <master-layout pageTitle="Sales">
+           
+             <div class=" w-5/6 h-1/4 mx-auto grid grid-cols-2 gap-2">
+                    <Chart class=" px-3 py-2 bg-white/40 backdrop-blur-md rounded-lg backdrop-filter"/> 
+                    <Pie class=" px-3 py-2 bg-white/40 backdrop-blur-md rounded-lg backdrop-filter"/>
+               </div>
        
             <div class=" flex justify-center mt-10">
           
@@ -27,7 +32,7 @@
         </div>
 
 
-         <div class=" flex justify-center mt-19">
+         <!-- <div class=" flex justify-center mt-19">
             <div class=" px-4 py-3 mx-4 my-3 w-auto md:w-2/5 rounded-lg shadow-md bg-white bg-opacity-30 text-gray-700 text-center
                          backdrop-blur-lg backdrop-filter
                          hover:shadow-xl hover:text-green-800 hover:border-2 hover:border-emerald-400/40 transition duration-300 ">
@@ -48,7 +53,12 @@
                          Click 
                     </button>
             </div>
-        </div>
+        </div> -->
+
+      
+       
+
+        
       
          
     </master-layout>
@@ -56,11 +66,13 @@
 </template>
 <script>
 
-//import Sales from 'vue-material-design-icons/Sale.vue'
-//import CusIcon from 'vue-material-design-icons/Account.vue'
+
+import Chart from '../../components/Chart/BarChartComponent.vue'
+import Pie from '../../components/Chart/PieChartComponent.vue'
+
 export default {
-    components:{
-       //CusIcon
-    }
+   components:{
+     Chart, Pie
+   }
 }
 </script>

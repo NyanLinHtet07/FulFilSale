@@ -8,11 +8,11 @@
                 <img src="/fulfil.png" alt="fulfil" class=" object-scale-down w-48 mx-auto" />
             </header>
            <nav>
-                <div class="border-b-2 border-gray-200 py-2 ">
+                <!-- <div class="border-b-2 border-gray-200 py-2 ">
                    <router-link to="/" class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
                      <HomeIcon class=" ml-2 mr-5"/> <p> Home </p>
                     </router-link> 
-                </div>
+                </div> -->
 
                  <div class="border-b-2 border-gray-200 py-2">
                    <router-link to="/select_sales" class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
@@ -32,9 +32,6 @@
                     </router-link>  
                 </div>
 
-                <!-- <div class>
-                     <router-link to="/about"  class="flex justify-start"> About</router-link>
-                </div> -->
 
                  <div class="border-b-2 border-gray-200 py-2">
                    <div class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700"  @click="logout()">
@@ -68,7 +65,7 @@
 </template>
 <script>
 
-import HomeIcon from 'vue-material-design-icons/HomeOutline.vue'
+//import HomeIcon from 'vue-material-design-icons/HomeOutline.vue'
 import MenuIcon from 'vue-material-design-icons/Menu.vue'
 //import CloseIcon from 'vue-material-design-icons/CloseCircleOutline.vue'
 import CartIcon from 'vue-material-design-icons/CartOutline.vue'
@@ -94,7 +91,7 @@ export default {
     },
 
     components:{
-       HomeIcon, MenuIcon,  CartIcon, LogoutIcon, SaleHistoryIcon, CustomerIcon
+        MenuIcon,  CartIcon, LogoutIcon, SaleHistoryIcon, CustomerIcon
     },
 
     methods: {
