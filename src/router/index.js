@@ -58,7 +58,7 @@ const routes = [
   },
   {
     path:'/shops/detail/:id',
-    component:() => import('../views/Shop/ShopView.vue'),
+    component:() => import('../views/Shop/ShopDetail.vue'),
   },
 
   {

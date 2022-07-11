@@ -1,5 +1,7 @@
 <template>
-    <div>
-        Hola
-    </div>
+   <master-layout>
+        <div>
+            Hola
+        </div>
+   </master-layout>
 </template>

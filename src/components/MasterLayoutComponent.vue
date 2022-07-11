@@ -32,6 +32,12 @@
                     </router-link>  
                 </div>
 
+                <div class="border-b-2 border-gray-200 py-2">
+                   <router-link to='/shop' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <ShopIcon class=" ml-2 mr-5"/> <p> Shops </p>
+                    </router-link>  
+                </div>
+
 
                  <div class="border-b-2 border-gray-200 py-2">
                    <div class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700"  @click="logout()">
@@ -71,6 +77,7 @@ import MenuIcon from 'vue-material-design-icons/Menu.vue'
 import CartIcon from 'vue-material-design-icons/CartOutline.vue'
 import SaleHistoryIcon from 'vue-material-design-icons/Sale.vue'
 import CustomerIcon from 'vue-material-design-icons/AccountGroup.vue'
+import ShopIcon from 'vue-material-design-icons/Storefront.vue'
 import LogoutIcon from 'vue-material-design-icons/Logout.vue'
 import {ref} from 'vue'
 
@@ -91,7 +98,7 @@ export default {
     },
 
     components:{
-        MenuIcon,  CartIcon, LogoutIcon, SaleHistoryIcon, CustomerIcon
+        MenuIcon,  CartIcon, LogoutIcon, SaleHistoryIcon, CustomerIcon, ShopIcon
     },
 
     methods: {

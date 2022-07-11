@@ -31,10 +31,10 @@
                             <tr v-for="(shop,index) in filteredShop" :key="index" class=" border-y border-gray-400/50 text-sm">
                             <td class=" py-2 pl-3 text-center">{{index + 1}}</td>
                             <td class=" py-2 pl-3 text-center">
-                                <div  v-if="shop.profile == null" alt="" class="object-scale-down h-12 w-12 p-1 rounded mx-auto">
-                                    Hello
+                                <div  v-if="shop.picture == null" alt="" class="object-scale-down h-10 w-10 p-1 rounded mx-auto">
+                                    <ShopIcon/>
                                 </div>
-                                <img v-else :src="`https://fulfilmm.com/img/profiles/` + shop.picture" alt="" srcset="" class="object-scale-down h-12 w-12 p-1 rounded-md mx-auto">
+                                <img :src="`https://fulfilmm.com/img/profiles/` + shop.picture" v-else alt="" srcset="" class="object-scale-down h-12 w-12 p-1 rounded-md mx-auto">
 
                             </td>
                             <td class=" py-2 pl-3 text-center">{{shop.name}}</td>
@@ -61,10 +61,10 @@
 
 
             <!----------------------  modal --------------------->
-            <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed mt-10 inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+            <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed mt-4 inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
                     <div class="relative w-auto my-6 mx-auto max-w-2xl w-xl">
                         <!--content-->
-                        <div class="border-0 mt-32  rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                        <div class="border-0 mt-48  rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                         <!--header-->
                         <div class="flex items-start justify-between p-2 border-b border-solid border-slate-200 rounded-t">
                             <h6>
@@ -201,6 +201,7 @@
 <script>
 
 import Loader from '../../components/loaderComponent.vue'
+import ShopIcon from 'vue-material-design-icons/StorefrontOutline.vue'
 
 
 
@@ -243,7 +244,7 @@ export default {
   
 
     components:{
-       Loader
+       Loader, ShopIcon
     },
 
     methods: {
