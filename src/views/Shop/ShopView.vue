@@ -7,14 +7,14 @@
              <div v-else>
                  <div  class=" mb-14 pb-3">
                     
-                    <div class="fixed top-14 bg-white z-30 w-full">
-                        <input type="search" v-model="search" placeholder=" search shops ..." animated/> 
-                         <button  type="button" class=" mr-5 ml-3 inline-block mt-3 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
+                    <div class="fixed top-16 bg-transparent z-30 w-5/6 mx-auto block">
+                        <input type="search" v-model="search" placeholder=" search shops ..." class=" w-4/5 rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2"/> 
+                         <button  type="button" class=" ml-3 inline-block mt-3 px-3 py-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
                             Add
                         </button>
                     </div>
-                    
-                    <div class=" mt-24">
+                     
+                    <div class=" mt-32">
 
                         <table class="table-auto border-collapse:separate rounded-xl border-0 border-accent w-5/6 my-6 bg-white bg-opacity-40 backdrop-blur-md mx-auto drop-shadow-sm shadow-2xl shadow-sky-200">
                         <thead class=" border-y border-gray-300/60">
@@ -61,10 +61,10 @@
 
 
             <!----------------------  modal --------------------->
-            <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+            <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed mt-10 inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
                     <div class="relative w-auto my-6 mx-auto max-w-2xl w-xl">
                         <!--content-->
-                        <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                        <div class="border-0 mt-32  rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                         <!--header-->
                         <div class="flex items-start justify-between p-2 border-b border-solid border-slate-200 rounded-t">
                             <h6>
@@ -72,29 +72,29 @@
                             </h6>
                         </div>
                         <!--body-->
-                        <div class="relative p-6  flex-auto">
+                        <div class="relative p-3  flex-auto">
                             <form @submit.prevent="submit">
                                   
 
-                        <div class=" border-b-2 border-gray-400/30 mb-3">
+                        <div class=" border-b-2 border-gray-400/30 mb-2">
                             <input type="text" v-model="form.name"  required="required" placeholder=" Enter Name " class=" w-full py-2 px-3 rounded-md bg-slate-200" />
                             <p v-if="! form.name" class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Name Require</p>
 
                         </div>
 
-                         <div class=" border-b-2 border-gray-400/30 mb-3">
+                         <div class=" border-b-2 border-gray-400/30 mb-2">
                             <input type="text" v-model="form.contact"  required="required" placeholder=" Enter Contact " class=" w-full py-2 px-3 rounded-md bg-slate-200" />
                             <p v-if="! form.name" class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Name Require</p>
 
                         </div>
 
-                        <div class="border-b-2 border-gray-400/30 mb-3">
+                        <div class="border-b-2 border-gray-400/30 mb-2">
                    
                             <input type="text" v-model="form.phone"  required="required" placeholder="Enter Phone Number" class=" w-full py-2 px-3 rounded-md bg-slate-200" />
                             <p v-if="! form.phone"  class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Phone Number Require</p>
                         </div>
 
-                        <div class="border-b-2 border-gray-400/30 mb-3">
+                        <div class="border-b-2 border-gray-400/30 mb-2 text-left grid grid-cols-2 gap-2">
                         <label>Select Type</label>
                             <select v-model="form.shop_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
                                 <option value="wholesales" class="text-sm"> WholeSales </option>
@@ -104,7 +104,7 @@
                     </div>
                 
 
-                    <div class="border-b-2 border-gray-400/30 mb-3">
+                    <div class="border-b-2 border-gray-400/30 mb-2 text-left grid grid-cols-2 gap-2">
                         <label> Select Branch</label>
                         <select v-model="form.branch_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
                             <option v-for="b in branches" :key="b.id" :value=b.id class="text-sm"> {{b.name}}</option>
@@ -112,7 +112,7 @@
                         <p v-if="! form.branch_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Branch</p>
                     </div>
 
-                       <div class="border-b-2 border-gray-400/30 mb-3">
+                       <div class="border-b-2 border-gray-400/30 mb-2 text-left grid grid-cols-2 gap-2">
                         <label> Select Region</label>
                         <select v-model="form.region_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
                             <option v-for="r in regions" :key="r.id" :value=r.id class="text-sm"> {{r.name}}</option>
@@ -122,28 +122,28 @@
                 
                 
 
-                <div class="border-b-2 border-gray-400/30 mb-3">
+                <div class="border-b-2 border-gray-400/30 mb-2 text-left grid grid-cols-2 gap-2">
                         <label> Zone</label>
-                        <select v-model="form.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                        <select v-model="form.zone_id" class=" px-2 py-1 rounded-md w-28 text-sm ml-6">
                             <option v-for="z in zones" :key="z.id" :value=z.id class="text-sm"> {{z.name}} </option>
                             
                         </select>
-                        <small v-if="! form.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</small>
+                        <p v-if="! form.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</p>
                 </div>
 
-                 <div class=" border-b-2 border-gray-400/30 mb-3">
+                 <div class=" border-b-2 border-gray-400/30 mb-2">
                             <input type="text" v-model="form.township"  required="required" placeholder=" Enter Township " class=" w-full py-2 px-3 rounded-md bg-slate-200" />
                             <p v-if="! form.township" class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Name Require</p>
 
                 </div>
 
-                 <div class=" border-b-2 border-gray-400/30 mb-3">
+                 <div class=" border-b-2 border-gray-400/30 mb-2">
                             <input type="text" v-model="form.address"  required="required" placeholder=" Enter Address " class=" w-full py-2 px-3 rounded-md bg-slate-200" />
                             <p v-if="! form.address" class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Address Require</p>
 
                 </div>
 
-                 <div class=" border-b-2 border-gray-400/30 mb-3">
+                 <div class=" border-b-2 border-gray-400/30 mb-2">
                             <input type="text" v-model="form.description"  required="required" placeholder=" Enter Description " class=" w-full py-2 px-3 rounded-md bg-slate-200" />
                             <!-- <p v-if="! form.name" class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Name Require</p> -->
 
@@ -254,7 +254,9 @@ export default {
        getPosition(){
             this.$getLocation()
             .then((coordinates) => {
-                window.alert(coordinates.lat);
+                //window.alert(coordinates.lat);
+                console.log(coordinates.lat +','+ coordinates.lng)
+                this.location = coordinates.lat +','+ coordinates.lng
             })
             .catch((error) => {
                 console.log(error);
@@ -304,16 +306,16 @@ export default {
         
         async submit(){
 
-            this.currentPosition();
+
 
             if(this.location == ''){
-                this.presentAlert();
+                window.alert('Please Check GPS');
             }
 
             else{
                  this.posting = true
              
-            //let location = this.marker.lat +','+ this.marker.lng;
+           
             var data = new FormData();
 
             data.append('name' , this.form.name);
@@ -346,13 +348,13 @@ export default {
                     this.m = res.message;
                      this.posting = false;
                      this.reset();
-                     this.shop();
                      this.getData();
                     
-                        this.marker = {
+                        this.location = {
                             lat :'',
                             lng:'',
                         }
+                    this.showModal = false;
                 }
             ).catch( error => {
                 console.log(error);
@@ -380,6 +382,7 @@ export default {
 
     created() {
         this.getData();
+        this.getPosition();
       
     },
 

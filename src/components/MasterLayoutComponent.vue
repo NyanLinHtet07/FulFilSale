@@ -42,7 +42,7 @@
         </div>
 
 
-        <div class="flex-1 overflow-y-scroll h-screen">
+        <div class="flex-1 overflow-y-scroll h-screen max-w-screen w-fit">
             <div class=" py-3 px-2 rounded-md bg-white backdrop-blur-lg mb-2  mx-2
                          border-2 border-emerald-200/20 flex justify-between fixed top-0  w-screen z-30">
                      <button  @click=" showSidebar = !showSidebar" class=" hover:bg-slate-200/10 hover:rounded-full hover:drop-shadow-lg hover:transition hover:delay-200 p-2">  <MenuIcon/> </button>
