@@ -29,7 +29,7 @@
                    
 
                      <table class="table-auto border-collapse:separate rounded-xl border-0 border-accent w-5/6 my-6 bg-white bg-opacity-40 backdrop-blur-md mx-auto drop-shadow-sm shadow-2xl shadow-sky-200">
-                        <thead class=" border-y border-gray-300/30">
+                        <thead class=" border-y border-gray-300/60">
                             <tr>
                             <th class=" py-2 font-thin">No</th>
                             <th class="py-2 font-thin">Img</th>
@@ -40,7 +40,7 @@
                             </tr>
                         </thead>
                         <tbody class=" bg-white bg-opacity-60 backdrop-blur-md ">
-                            <tr v-for="(cus,index) in filterCustomers" :key="index" class=" border-y border-gray-200/50 text-sm">
+                            <tr v-for="(cus,index) in filterCustomers" :key="index" class=" border-y border-gray-400/50 text-sm">
                             <td class=" py-2 pl-3 text-center">{{index + 1}}</td>
                             <td class=" py-2 pl-3 text-center">
                                 <div  v-if="cus.profile == null" alt="" class="object-scale-down h-12 w-12 p-1 rounded mx-auto">
@@ -78,12 +78,12 @@
                             </h6>
                         </div>
                         <!--body-->
-                        <div class="relative p-6 flex-auto">
+                        <div class="relative p-6  flex-auto">
                             <form @submit.prevent="submit">
-                                     <div class=" text-left">
-                                      
-                                        <p v-for=" r in regions" :key="r.id" class=" font-bold"> Region - {{r.name}}</p>
-                        </div>
+                                     <div class="text-left grid grid-cols-2 gap-2 mb-2">
+                                        <p class=" font-bold"> Region -</p>
+                                        <p v-for=" r in region" :key="r.id" class=" font-bold"> {{r.name}}</p>
+                                    </div>
 
                         <div class=" border-b-2 border-gray-400/30 mb-3">
                             <input type="text" v-model="form.name"  required="required" placeholder=" Enter Name " class=" w-full py-2 px-3 rounded-md bg-slate-200" />

@@ -269,7 +269,7 @@
                 <input type="search" autocomplete="off" v-model="search" class=" w-full rounded-xl drop-shadow-lg py-2 px-3 mx-2 mb-3" placeholder=" Search Customers ...">
                 <p v-if="! saleData.customer_id" class=" text-xs text-left ml-3 text-ellipsis text-red-800 font-bold">Please Select Customer Name</p>
                 <ul class="" v-if="!(search == '')">
-                             <li v-for="data in filteredCustomer" class=" my-1 text-center rounded-lg px-2 py-1 bg-slate-100 hover:shadow-lg transition ease-linear duration-200" :key="data.id" @click="addData(data)" button="true">
+                             <li v-for="data in filteredCustomer" class=" my-1 text-center rounded-lg px-2 py-1 bg-slate-50 hover:shadow-lg transition ease-linear duration-200" :key="data.id" @click="addData(data)" button="true">
                                 <p :value="data"> {{data.name}}</p>
                             </li> 
                         </ul>
@@ -721,7 +721,7 @@ export default {
                      this.postingCus = false;
                      this.resetCus();
                      this.wholeSales();
-                     window.alert('Hello')
+                     window.alert('Successfully, Customer Added')
                     this.showModal = false;
                      
                 })
@@ -774,6 +774,7 @@ export default {
                
                if( inv_id == null){
                 //    this.presentAlert();
+                     window.alert('Please Fill Required Field')
                     this.posting = false;
                }
 

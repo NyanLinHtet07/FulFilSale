@@ -51,6 +51,16 @@ const routes = [
     component:() => import('../views/Sales/invoiceDetail.vue'),
   },
 
+  //for shop
+  {
+    path:'/shop',
+    component:() => import('../views/Shop/ShopView.vue'),
+  },
+  {
+    path:'/shops/detail/:id',
+    component:() => import('../views/Shop/ShopView.vue'),
+  },
+
   {
     path: '/about',
     name: 'about',

@@ -270,10 +270,10 @@
 
                                     <table class="table-auto px-4 w-full py-2 my-3 rounded-md">
                                             <thead class=" text-center font-bold text-emerald-900 bg-emerald-300 rounded-lg">
-                                                <th> Name </th>
-                                                <th> Unit </th> 
-                                                <th> Price </th>
-                                                <th> Quantity  </th>
+                                                <th class=" w-32"> Name </th>
+                                                <th class=" w-32"> Unit </th> 
+                                                <th class=" w-32"> Price </th>
+                                                <th class=" w-32"> Quantity  </th>
                                                 <th> Discount </th>
                                                 <th> Total </th>
                                                 <th> Sub </th>
@@ -358,7 +358,7 @@
                                                 </tr> 
                                             
                                             </tbody>
-                                            <tfoot class="text-sky-900 bg-white">
+                                            <tfoot class="text-sky-900 bg-white mx-2 text-sm">
                                                 <tr class=" my-2">
                                                     <td colspan="5" class=" text-right"> Total </td>
                                                     <td colspan="2" class=" text-center"> {{ getTotal}}</td>
@@ -366,7 +366,7 @@
 
                                                 <tr>
                                                 
-                                                        <td colspan="5" class=" text-right"> Discount </td>
+                                                        <td colspan="5" class=" text-right mr-3"> Discount </td>
                                                 
                                                     <td colspan="2">
                                                         <div v-for="cartDis in amount_discount" :key="cartDis.id">
@@ -387,7 +387,7 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td colspan="5" class=" text-right my-3"> Tax </td>
+                                                    <td colspan="5" class=" text-right my-3 mr-3"> Tax </td>
                                                     <td colspan="2" class="text-center"> 
                                                         <select name="" id="" v-model=" invoice.tax_rate" class=" rounded-md w-3/6 bg-gray-50  px-2 py-2 mx-auto block">
                                                             <option v-for="t in taxes" :key="t.id" :value="t.rate"> {{t.name}} </option>
@@ -397,7 +397,7 @@
                                                     </td>
                                                 </tr>
                                                 <tr class="text-lg font-thin">
-                                                    <td colspan="5" class=" text-right"> Grand Total</td>
+                                                    <td colspan="5" class=" text-right mr-3"> Grand Total</td>
                                                     <td colspan="2" class="text-center">{{ addTotal }}</td>
                                                 </tr>
                                             </tfoot>
@@ -642,7 +642,7 @@
 
                         <div class=" text-left grid grid-cols-2 gap-2 mb-2">
                             <label for=""> Date </label>
-                             <input type="date" class="bg-slate-50 ml-2 px-3 py-2 rounded" v-model="form.transaction_date"/>
+                             <input type="date" class="bg-slate-100 ml-2 px-3 py-2 rounded" v-model="form.transaction_date"/>
                         </div>
 
                         <div class=" text-left grid grid-cols-2 gap-2 mb-2">
@@ -660,7 +660,7 @@
                     <div class=" text-left grid grid-cols-2 gap-2 mb-2">
                         <label> Currency</label>
                         <div>
-                             <select v-model="form.currency" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                             <select v-model="form.currency" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-100">
                             <option value="MMK" class="text-sm"> MMK</option>
                             </select> 
                             <p v-if="! form.currency" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Currency</p>
@@ -670,7 +670,7 @@
                 
                 <div class=" text-left grid grid-cols-2 gap-2 mb-2">
                         <label>Advance</label>
-                        <select v-model="form.advance"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                        <select v-model="form.advance"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-100">
                             <option value="on" class="text-sm"> on </option>
                              <option value="" class="text-sm"> off </option>
                         </select>   
@@ -681,7 +681,7 @@
                   <div class=" text-left grid grid-cols-2 gap-2 mb-2">
                         <label>Payment Method</label>
                         <div>
-                             <select v-model="form.payment_method"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                             <select v-model="form.payment_method"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-100">
                             <option v-for="(method,index) in payment_method" :key="index" :value="method" class="text-sm"> {{ method}} </option>
 
                             </select>
@@ -694,7 +694,7 @@
                        <label>Cashier</label>
 
                        <div>
-                              <select v-model="form.approver_id"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                              <select v-model="form.approver_id"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-100">
                                     <option v-for="cashier in cashiers" :key="cashier.id" :value="cashier.id" class="text-sm"> {{ cashier.name}} </option>
 
                                 </select>
@@ -707,7 +707,7 @@
                        <label>Category</label>
 
                        <div>
-                             <select v-model="form.category"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                             <select v-model="form.category"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-100">
                                 <option v-for="category in payment_category" :key="category.id" :value="category.id" class="text-sm"> {{ category.name}} </option>
 
                             </select>

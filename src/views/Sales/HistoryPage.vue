@@ -1,7 +1,7 @@
 <template>
         <master-layout pageTitle="Sales History">
         <div v-if="loading">
-                <Loader/>
+                <Loader/> 
         </div>
        <div v-else>
            

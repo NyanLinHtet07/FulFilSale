@@ -270,7 +270,7 @@
                 <input type="search" autocomplete="off" v-model="search" class=" w-full rounded-xl drop-shadow-lg py-2 px-3 mx-2 mb-3" placeholder=" Search Customers ...">
                 <p v-if="! saleData.customer_id" class=" text-xs text-left ml-3 text-ellipsis text-red-800 font-bold">Please Select Customer Name</p>
                 <ul class="" v-if="!(search == '')">
-                             <li v-for="data in filteredCustomer" class=" my-1 text-center rounded-lg px-2 py-1 bg-slate-100 hover:shadow-lg transition ease-linear duration-200" :key="data.id" @click="addData(data)" button="true">
+                             <li v-for="data in filteredCustomer" class=" my-1 text-center rounded-lg px-2 py-1 bg-slate-50 hover:shadow-lg transition ease-linear duration-200" :key="data.id" @click="addData(data)" button="true">
                                 <p :value="data"> {{data.name}}</p>
                             </li> 
                         </ul>
@@ -375,7 +375,7 @@
                     <div class="border-b-2 border-gray-400/30 mb-3">
                         <label> Shop</label>
                         <select v-model="formCus.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                            <option v-for="c in companies" :key="c.id" :value=c.id class="text-sm"> {{c.name}}</option>
+                            <option v-for="(c,index) in companies" :key="index" :value=index class="text-sm"> {{c}}</option>
                         </select> 
                         <p v-if="! formCus.company_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Shop</p>
                     </div>
@@ -726,7 +726,7 @@ export default {
                      this.postingCus = false;
                      this.resetCus();
                      this.wholeSales();
-                     window.alert('Hello')
+                     window.alert('Successfully, Customer Added')
                     this.showModal = false;
                      
                 })
