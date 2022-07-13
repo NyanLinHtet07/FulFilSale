@@ -4,8 +4,8 @@
         
        
         
-       <div class=" mt-6 mx-2 flex" v-else>
-           <div class=" w-2/5 h-auto mx-1">
+       <div class=" mt-6 mx-2" v-else>
+           <div class=" w-full h-auto mx-1" v-if="shop && !cart && !info">
                 <div class=" text-left ml-4 my-2">
                     <button  @click="openItems" class=" text-xs px-3 py-1 mx-2 rounded-full shadow-md text-white bg-emerald-500/70"> Products</button>
                     <button @click="openFoc" class="  text-xs px-3 py-1 mx-2 rounded-full shadow-md text-white bg-sky-500/70"> Focs </button>
@@ -45,12 +45,186 @@
                     </div>
                 </div>
                 
-                
+                <button type="" @click="cartView"> Cart</button>
            
            </div>
 
-           <div class=" w-3/5 px-2 py-1 rounded-md bg-white/40 backdrop-blur-lg overflow-y-auto">
+           <div class=" w-full px-2 py-1 rounded-md bg-white/40 backdrop-blur-lg overflow-y-auto" >
+           
+                <!------------------- for invoive ------------------------>
+            <div v-if="!shop && cart && !info" class="h-fit mx-1 bg-white/70 p-2 bg-opacity-50 backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg" >
+                    <table class="table-auto my-1 border-none  w-full bg-white bg-opacity-40  overflow-x-auto">
+                <thead class=" border-y border-gray-300/30 bg-white/80">
+                    <tr class="text-sm">
+                    <th class=" py-2 font-thin">No</th>
+                    <!-- <th class="py-2 font-thin">Icon</th> -->
+                    <th class=" py-2 font-thin">Name</th>
+                    <th class="py-2 font-thin"> Unit</th>
+                    <th class="py-2 font-thin"> Price</th>
+                    <th class="py-2 font-thin"> Qty</th>
+                    <th class="py-2 font-thin"> Dis </th>
+                    <th class="py-2 font-thin"> Total</th>
+                    <th class=" py-2 font-thin">Delete</th>
+                    </tr>
+                </thead>
+                <tbody class=" bg-transparent">
+
+                    <!------------------ for items  -------------------->
+                    <tr  v-for="(product,index) in cartItems" :key="product.id" class=" border-y border-gray-200/50 text-sm">
+                    <td class=" py-2 pl-3 text-center"> {{index + 1}} </td>
+            
+                    <td class=" py-2 pl-3 text-center">{{ product.product_name}}</td>
+
+                    <td class=" py-2 pl-3 text-center">
+                                <div class="dropdown">
+                                        <p v-if=" product.unitId == 0"> Select Unit </p>
+                                        <p v-else v-for="uni in product.unit" :key="uni.id" class="mt-2">
+                                            <span v-if="product.unitId == uni.id"> {{ uni.unit}}</span>    
+                                        </p>  
+
+                                                <ul class="dropdown-content">
+                                                    <li  v-for="u in product.unit" :key="u.id"  @click="pricing(product.id , u.id)" class=" my-2 rounded px-2 py-2 bg-white text-sm"> {{u.unit}} </li>
+                                                </ul>  
+                                    </div> 
+                    </td>
+
+                    <td class=" py-2 pl-3 text-center">{{ product.price}}</td>
+
+                    <td class=" py-2 pl-3 text-center">
+                        <input type="number"  v-model="product.quantity" @keyup="pricing(product.id , product.unitId)" class=" bg-white w-28 py-2 rounded text-center" />
+                    </td>
+
+                    <td class=" py-2 pl-3 text-center">
+                        <div v-for="(dis,index) in itemDiscounts" :key="index">
+                                    <span v-if="product.variant.id == dis.variant_id">
+                                                            <select v-model="product.discount" class="text-sm block appearance-none w-full  text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none bg-white" id="grid-state">
+                                                                <option :value="dis.rate">{{dis.rate}} %</option>
+                                                            </select>
+                                    </span>
+                                </div>
+                    </td>
+
+                    <td class=" py-2 text-center">{{ (product.price * product.quantity)-(((product.price*product.quantity)/100)*product.discount) }}</td>
+                    
+                    <td class=" py-2 text-center"> 
+                        <button  @click="removeItem(product)" class="p-1 rounded-full bg-red-700/90 drop-shadow-lg shadow-md shadow-red-200 decoration-slate-200 text-white 
+                                    hover:drop-shadow-sm hover:opacity-80 hover:shadow-inner
+                                    transition ease-in-out duration-300"> 
+                                    <DeleteIcon/>
+                        </button>
+                        </td>
+                    </tr>
+
+                    <!---------- end ----------------->
+
+                    <!----------------- for foc ---------->
+                    <tr  v-for="foc in focItems" :key="foc.id" class=" bg-slate-500/20 border-y border-gray-200/50 text-sm">
+                    <td class=" py-2 pl-3 text-center"> # </td>
+            
+                    <td class=" py-2 pl-3 text-center">{{ foc.variant.product_name}}</td>
+
+                    <td class=" py-2 pl-3 text-center">
+                        <select v-model="foc.unitId" 
+                                class="block appearance-none w-full  text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none bg-white" id="grid-state">
+                                                <option v-for=" u in foc.unit" :key="u.id" :value="u.id">
+                                                            <span> {{u.unit}}  </span>
+                                                </option>
+                        </select>
+                    </td>
+
+                    <td class=" py-2 pl-3 text-center"> foc item </td>
+
+                    <td class=" py-2 pl-3 text-center">
+                        <input type="number"  v-model="foc.quantity" class=" bg-white w-28 py-2 rounded text-center" />
+                    </td>
+
+                    <td class=" py-2 pl-3 text-center">
+                        00.00
+                    </td>
+
+                    <td class=" py-2 pl-3 text-center">00.00</td>
+                    
+                    <td class=" py-2 text-center"> 
+                        <button  @click="removeFoc(foc)" class="p-1 rounded-full bg-red-700/90 drop-shadow-lg shadow-md shadow-red-200 decoration-slate-200 text-white 
+                                    hover:drop-shadow-sm hover:opacity-80 hover:shadow-inner
+                                    transition ease-in-out duration-300"> 
+                                    <DeleteIcon/>
+                        </button>
+                        </td>
+                    </tr>
+
+                
+                </tbody>
+                <tfoot class=" bg-white/70 text-sm font-semibold">
+                    <tr>
+                        <td colspan="6" class="text-right"> Total</td>
+                        <td colspan="2"> {{getTotal}} </td>
+                    </tr>
+                    <tr>
+                    <td colspan="6" class="text-right"> Discount </td>
+                    <td>
+                            <div v-for="cartDis in cartDiscounts" :key="cartDis.id">
+                                <div v-if="cartDis.min_amount < getTotal && cartDis.max_amount > getTotal">
+                                    <select name="" id="" v-model="tax" class=" rounded-md w-3/6 bg-gray-50  px-2 py-2 mx-auto block">
+                                        <option :value="cartDis.rate"> {{cartDis.rate}} </option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                        </td> 
+                        <td>
+                            {{addDis}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6" class=" text-right"> Tax</td>
+                        <td> 
+                            <select name="" id="" v-model="tax" class=" rounded-md w-3/6 bg-gray-50  px-2 py-2 mx-auto block">
+                                        <option v-for="(t,index) in taxes" :key="index" :value="t.rate"> {{t.name}} </option>
+                                    </select>
+                        </td>
+                        <td>
+                            {{addTax}}   
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6" class=" text-right"> GrandTotal</td>
+                        <td colspan="2"> {{ addTotal }} </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class=" text-right"> Cash</td>
+                        <td colspan="2"> 
+                            <input type="number"  v-model="cash" class=" bg-gray-200 w-28 py-2 rounded text-center" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class=" text-right"> Cash Back</td>
+                        <td colspan="2"> 
+                            <p v-if=" cash == null"> 0 </p>
+                            <p v-else> {{ cash - addTotal }} </p>
+                        </td>
+                    </tr>
+
+                </tfoot>
+
+
+            </table>
+            
+            <div class=" mt-20">
+                <button type="" @click="infoView" class=" bg-red-700"> Info </button>
+            </div>
+            
+            </div>
+           <!------------------end -------------------->
+
+
+
+           <!------------------ for customer ------------------>
+
             <!----------------------- invoice information --------------------->
+             <div v-if="!shop && !cart && info">
               <h3 class=" font-semibold py-2 px-2 text-left"> Invoice information </h3>
             <div class=" grid grid-cols-4 gap-1 rounded-md px-2 py-1 mt-2 mb-4 bg-white/80">
                  <!-------------------- invoice information ------------------->
@@ -96,172 +270,6 @@
                                      <!-- <p v-if="! zone_id" class=" text-sm text-ellipsis text-red-800 font-bold">Please Select Sale Zone</p> -->
                          </div>
             </div>
-                <!------------------- for invoive ------------------------>
-           <div class="h-fit mx-1 bg-white/70 p-2 bg-opacity-50 backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg">
-                <table class="table-auto my-1 border-none  w-full bg-white bg-opacity-40  overflow-x-auto">
-            <thead class=" border-y border-gray-300/30 bg-white/80">
-                <tr class="text-sm">
-                <th class=" py-2 font-thin">No</th>
-                <!-- <th class="py-2 font-thin">Icon</th> -->
-                <th class=" py-2 font-thin">Name</th>
-                <th class="py-2 font-thin"> Unit</th>
-                <th class="py-2 font-thin"> Price</th>
-                <th class="py-2 font-thin"> Qty</th>
-                <th class="py-2 font-thin"> Dis </th>
-                <th class="py-2 font-thin"> Total</th>
-                <th class=" py-2 font-thin">Delete</th>
-                </tr>
-            </thead>
-            <tbody class=" bg-transparent">
-
-                <!------------------ for items  -------------------->
-                <tr  v-for="(product,index) in cartItems" :key="product.id" class=" border-y border-gray-200/50 text-sm">
-                <td class=" py-2 pl-3 text-center"> {{index + 1}} </td>
-           
-                <td class=" py-2 pl-3 text-center">{{ product.product_name}}</td>
-
-                <td class=" py-2 pl-3 text-center">
-                             <div class="dropdown">
-                                    <p v-if=" product.unitId == 0"> Select Unit </p>
-                                    <p v-else v-for="uni in product.unit" :key="uni.id" class="mt-2">
-                                        <span v-if="product.unitId == uni.id"> {{ uni.unit}}</span>    
-                                    </p>  
-
-                                             <ul class="dropdown-content">
-                                                <li  v-for="u in product.unit" :key="u.id"  @click="pricing(product.id , u.id)" class=" my-2 rounded px-2 py-2 bg-white text-sm"> {{u.unit}} </li>
-                                            </ul>  
-                                </div> 
-                </td>
-
-                <td class=" py-2 pl-3 text-center">{{ product.price}}</td>
-
-                <td class=" py-2 pl-3 text-center">
-                     <input type="number"  v-model="product.quantity" @keyup="pricing(product.id , product.unitId)" class=" bg-white w-28 py-2 rounded text-center" />
-                </td>
-
-                <td class=" py-2 pl-3 text-center">
-                    <div v-for="(dis,index) in itemDiscounts" :key="index">
-                                <span v-if="product.variant.id == dis.variant_id">
-                                                        <select v-model="product.discount" class="text-sm block appearance-none w-full  text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none bg-white" id="grid-state">
-                                                            <option :value="dis.rate">{{dis.rate}} %</option>
-                                                        </select>
-                                </span>
-                            </div>
-                </td>
-
-                <td class=" py-2 text-center">{{ (product.price * product.quantity)-(((product.price*product.quantity)/100)*product.discount) }}</td>
-                 
-                  <td class=" py-2 text-center"> 
-                      <button  @click="removeItem(product)" class="p-1 rounded-full bg-red-700/90 drop-shadow-lg shadow-md shadow-red-200 decoration-slate-200 text-white 
-                                  hover:drop-shadow-sm hover:opacity-80 hover:shadow-inner
-                                  transition ease-in-out duration-300"> 
-                                  <DeleteIcon/>
-                    </button>
-                    </td>
-                </tr>
-
-                <!---------- end ----------------->
-
-                <!----------------- for foc ---------->
-                <tr  v-for="foc in focItems" :key="foc.id" class=" bg-slate-500/20 border-y border-gray-200/50 text-sm">
-                <td class=" py-2 pl-3 text-center"> # </td>
-           
-                <td class=" py-2 pl-3 text-center">{{ foc.variant.product_name}}</td>
-
-                <td class=" py-2 pl-3 text-center">
-                      <select v-model="foc.unitId" 
-                            class="block appearance-none w-full  text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none bg-white" id="grid-state">
-                                            <option v-for=" u in foc.unit" :key="u.id" :value="u.id">
-                                                        <span> {{u.unit}}  </span>
-                                            </option>
-                     </select>
-                </td>
-
-                <td class=" py-2 pl-3 text-center"> foc item </td>
-
-                <td class=" py-2 pl-3 text-center">
-                     <input type="number"  v-model="foc.quantity" class=" bg-white w-28 py-2 rounded text-center" />
-                </td>
-
-                <td class=" py-2 pl-3 text-center">
-                    00.00
-                </td>
-
-                <td class=" py-2 pl-3 text-center">00.00</td>
-                 
-                  <td class=" py-2 text-center"> 
-                      <button  @click="removeFoc(foc)" class="p-1 rounded-full bg-red-700/90 drop-shadow-lg shadow-md shadow-red-200 decoration-slate-200 text-white 
-                                  hover:drop-shadow-sm hover:opacity-80 hover:shadow-inner
-                                  transition ease-in-out duration-300"> 
-                                  <DeleteIcon/>
-                    </button>
-                    </td>
-                </tr>
-
-              
-            </tbody>
-            <tfoot class=" bg-white/70 text-sm font-semibold">
-                <tr>
-                    <td colspan="6" class="text-right"> Total</td>
-                    <td colspan="2"> {{getTotal}} </td>
-                </tr>
-                <tr>
-                   <td colspan="6" class="text-right"> Discount </td>
-                   <td>
-                        <div v-for="cartDis in cartDiscounts" :key="cartDis.id">
-                            <div v-if="cartDis.min_amount < getTotal && cartDis.max_amount > getTotal">
-                                  <select name="" id="" v-model="tax" class=" rounded-md w-3/6 bg-gray-50  px-2 py-2 mx-auto block">
-                                    <option :value="cartDis.rate"> {{cartDis.rate}} </option>
-                                </select>
-                            </div>
-                            
-                        </div>
-                    </td> 
-                    <td>
-                        {{addDis}}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="6" class=" text-right"> Tax</td>
-                    <td> 
-                         <select name="" id="" v-model="tax" class=" rounded-md w-3/6 bg-gray-50  px-2 py-2 mx-auto block">
-                                    <option v-for="(t,index) in taxes" :key="index" :value="t.rate"> {{t.name}} </option>
-                                </select>
-                    </td>
-                    <td>
-                        {{addTax}}   
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="6" class=" text-right"> GrandTotal</td>
-                    <td colspan="2"> {{ addTotal }} </td>
-                </tr>
-                  <tr>
-                    <td colspan="6" class=" text-right"> Cash</td>
-                    <td colspan="2"> 
-                         <input type="number"  v-model="cash" class=" bg-gray-200 w-28 py-2 rounded text-center" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6" class=" text-right"> Cash Back</td>
-                    <td colspan="2"> 
-                        <p v-if=" cash == null"> 0 </p>
-                        <p v-else> {{ cash - addTotal }} </p>
-                    </td>
-                </tr>
-
-            </tfoot>
-
-
-        </table>
-           </div>
-           <!------------------end -------------------->
-
-
-
-           <!------------------ for customer ------------------>
             
            <div class=" flex justify-between my-2">
                 
@@ -331,6 +339,8 @@
                              <button :disabled="posting" type="submit" @click="submitData()" class=" px-2 py-1 w-32 rounded-full bg-emerald-800 text-white" > Submit </button>
                              <!-- <ion-spinner  name="circles" v-if='posting' class=" mx-3"></ion-spinner> -->
                         </div>
+        
+        </div>
 
            <!------------------------------------ modal box --------------------------------->
                 <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
@@ -459,6 +469,11 @@ export default {
 
      data() {
         return {
+
+            shop:true,
+            cart:false,
+            info:false,
+
             cash:null,
             showModal: false,
             posting:false,
@@ -533,8 +548,26 @@ export default {
 
  
     methods:{
+        
+        shopView(){
+            this.shop = true;
+            this.cart = false;
+            this.info = false;
+            },
+        
+        cartView(){
+            this.shop = false;
+            this.cart = true;
+            this.info = false;
+        },
 
-           toggleModal(){
+        infoView(){
+             this.shop = false;
+            this.cart = false;
+            this.info = true;
+        },
+
+        toggleModal(){
                         this.showModal = !this.showModal;
                         },
 

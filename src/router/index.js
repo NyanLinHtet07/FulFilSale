@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-//import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
@@ -7,6 +7,11 @@ const routes = [
     redirect:'/select_sales'
     // name: 'home',
     // component: HomeView
+  },
+
+  {
+    path:'/home',
+    component: HomeView
   },
 
   {
@@ -27,6 +32,14 @@ const routes = [
   {
     path:'/retailsales',
     component:() => import('../views/Sales/retailSales.vue')
+  },
+  {
+    path:'/mobile/wholesales',
+    component:() => import('../views/Mobile/WholeSalesMobile.vue')
+  },
+  {
+    path:'/mobile/retailsales',
+    component:() => import('../views/Mobile/RetailSalesMobile.vue')
   },
 
   {

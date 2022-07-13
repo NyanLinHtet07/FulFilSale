@@ -19,11 +19,14 @@
                         <table class="table-auto border-collapse:separate rounded-xl border-0 border-accent w-5/6 my-6 bg-white bg-opacity-40 backdrop-blur-md mx-auto drop-shadow-sm shadow-2xl shadow-sky-200">
                         <thead class=" border-y border-gray-300/60">
                             <tr>
-                            <th class=" py-2 font-thin">No</th>
-                            <th class="py-2 font-thin">Img</th>
-                            <th class=" py-2 font-thin">Name</th>
-                            <th class="py-2 font-thin"> Phone</th>
-                            <th class="py-2 font-thin">Detail</th>
+                            <th class=" py-2 font-bold text-sm">No</th>
+                            <th class=" py-2 font-bold text-sm">Img</th>
+                            <th class=" py-2 font-bold text-sm">Name</th>
+                            <th class=" py-2 font-bold text-sm"> Phone</th>
+                            <th class=" py-2 font-bold text-sm"> Branch</th>
+                            <th class=" py-2 font-bold text-sm"> Region</th>
+                            <th class=" py-2 font-bold text-sm"> Zone </th>
+                            <!-- <th class="py-2 font-thin">Detail</th> -->
                             
                             </tr>
                         </thead>
@@ -34,19 +37,25 @@
                                 <div  v-if="shop.picture == null" alt="" class="object-scale-down h-10 w-10 p-1 rounded mx-auto">
                                     <ShopIcon/>
                                 </div>
-                                <img :src="`https://fulfilmm.com/img/profiles/` + shop.picture" v-else alt="" srcset="" class="object-scale-down h-12 w-12 p-1 rounded-md mx-auto">
+                                <img :src="`https://fulfilmm.com/img/profiles/` + shop.picture" v-else alt="" srcset="" class="object-scale-down h-10 w-10 p-1 rounded-md mx-auto">
 
                             </td>
                             <td class=" py-2 pl-3 text-center">{{shop.name}}</td>
                             <td class=" py-2 pl-3 text-center text-sm">{{shop.phone}}</td>
+                             <td class=" py-2 pl-3 text-center text-sm">{{shop.branch.name}}</td>
+                              <td class=" py-2 pl-3 text-center text-sm">{{shop.region.name}}</td>
+                              <td class=" py-2 pl-3 text-center text-sm">
+                                <p v-if=" shop.zone == null"> There is no zone</p>
+                                <p v-else>{{ shop.zone.name}}</p>
+                              </td>
                         
-                            <td class=" py-2 text-center">
+                            <!-- <td class=" py-2 text-center">
                                 <router-link :to="`/shops/detail/${shop.id}`" class="p-2 text-xs rounded-full bg-emerald-700/90  drop-shadow-lg shadow-md shadow-emerald-200 decoration-slate-200 text-white 
                                             hover:drop-shadow-sm hover:opacity-80 hover:shadow-inner
                                             transition ease-in-out duration-300"> 
                                             View
                                 </router-link> 
-                            </td>
+                            </td> -->
                             
                             </tr>
                         

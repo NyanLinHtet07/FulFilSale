@@ -38,6 +38,11 @@
                     </router-link>  
                 </div>
 
+                <div class="border-b-2 border-gray-200 py-2">
+                   <a href='https://fulfilmm.com/employee/login' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <LinkIcon class=" ml-2 mr-5"/> <p> Back Office </p>
+                    </a>  
+                </div>
 
                  <div class="border-b-2 border-gray-200 py-2">
                    <div class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700"  @click="logout()">
@@ -48,7 +53,7 @@
         </div>
 
 
-        <div class="flex-1 overflow-y-scroll h-screen max-w-screen w-fit">
+        <div class="flex-1 overflow-y-auto h-screen max-w-screen w-screen">
             <div class=" py-3 px-2 rounded-md bg-white backdrop-blur-lg mb-2  mx-2
                          border-2 border-emerald-200/20 flex justify-between fixed top-0  w-screen z-30">
                      <button  @click=" showSidebar = !showSidebar" class=" hover:bg-slate-200/10 hover:rounded-full hover:drop-shadow-lg hover:transition hover:delay-200 p-2">  <MenuIcon/> </button>
@@ -79,6 +84,7 @@ import SaleHistoryIcon from 'vue-material-design-icons/Sale.vue'
 import CustomerIcon from 'vue-material-design-icons/AccountGroup.vue'
 import ShopIcon from 'vue-material-design-icons/Storefront.vue'
 import LogoutIcon from 'vue-material-design-icons/Logout.vue'
+import LinkIcon from 'vue-material-design-icons/Link.vue'
 import {ref} from 'vue'
 
 
@@ -98,7 +104,7 @@ export default {
     },
 
     components:{
-        MenuIcon,  CartIcon, LogoutIcon, SaleHistoryIcon, CustomerIcon, ShopIcon
+        MenuIcon,  CartIcon, LogoutIcon, SaleHistoryIcon, CustomerIcon, ShopIcon , LinkIcon
     },
 
     methods: {

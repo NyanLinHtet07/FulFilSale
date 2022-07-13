@@ -1,12 +1,10 @@
 <template>
     <master-layout pageTitle="Home">
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
- 
-     <h1 class="text-3xl font-bold underline text-green-300">
-    Hello world!
-  </h1>
+      <p>{{lat}},{{lon}}</p>
+      <p>{{error}}</p>
+      <button @click="myFunction()">Click Me</button>
+      
   </div>
   </master-layout>
 </template>
@@ -18,9 +16,31 @@
 
 export default {
   name: 'HomeView',
-  components: {
-    //HelloWorld,
-  
-  }
+
+  data() {
+    return {
+        error: '',
+        lat:'',
+        lon:''
+    }
+  },
+
+
+   methods:{
+    myFunction() {		
+        if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(this.showPosition);
+        }else{
+        this.error = "Geolocation is not supported."; 
+          
+        }
+      },
+    showPosition(position) {	
+      this.lat = position.coords.latitude;
+      this.lon = position.coords.longitude;
+    }
+	}
+
+
 }
 </script>
