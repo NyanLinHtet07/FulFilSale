@@ -7,12 +7,14 @@
             </div>
             <div v-else class=""> 
                 <div v-if=" invoice.cancel == 1">
-                    <p class=" text-red-700 font-bold text-xl"> This invoice was canceled</p>
+                    <p class=" text-red-700 font-bold text-xl text-left"> This invoice was canceled</p>
                 </div>
-                <div v-else class=" flex mb-3">
+                <div v-else class=" flex mb-3 overflow-x-auto">
+                    <div>
                     <button class="mx-2 px-2 py-1 rounded-xl text-sm drop-shadow-md shadow-md shadow-stone-300 bg-stone-500 text-white
                                     hover:bg-stone-600/50 transition duration-200 ease-in-out " 
                         @click="markSent()" :disabled="invoice.mark_sent == 1"> Mark Send </button>
+                    </div>
                 
                     <button @click="toggleModal" class="mx-2 px-2 py-1 rounded-xl text-sm drop-shadow-md shadow-md shadow-lime-100 bg-lime-500 text-white
                                     hover:bg-lime-600/50 transition duration-200 ease-in-out" 
@@ -21,11 +23,11 @@
                     <div v-if="invoice.status == 'Draft' && invoice.mark_sent == 0">
                         <button @click="edit()" v-if=" !visible"  
                         class="mx-2 px-2 py-1 rounded-xl text-sm drop-shadow-md shadow-md shadow-sky-100 bg-sky-500 text-white
-                                    hover:bg-sky-600/50 transition duration-200 ease-in-out"> Edit </button>
+                                    hover:bg-sky-600/50 transition duration-200 ease-in-out"> Edit Inv </button>
 
                         <button @click="detail()" v-if="visible" 
                         class="mx-2 px-2 py-1 rounded-xl text-sm drop-shadow-md shadow-md shadow-orange-100 bg-orange-900 text-white
-                                    hover:bg-orange-600 transition duration-200 ease-in-out"> Detail </button>
+                                    hover:bg-orange-600 transition duration-200 ease-in-out"> Detail Inv </button>
                     </div>
                     <div v-else>
                         <button disabled class="mx-2 px-2 py-1 rounded-xl text-sm drop-shadow-md shadow-md shadow-slate-100 bg-slate-500 text-white
@@ -477,7 +479,7 @@
             <div class="invisible">
                 <div  id="print"
                     style="max-width: 800px;margin: auto;padding: 30px;font-size: 16px;line-height: 24px;font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;color: #555;">
-                    <table cellpadding="0" cellspacing="0" style="width: 100%;line-height: inherit;text-align: left; border:none;">
+                    <table cellpadding="0" cellspacing="0" border="0" style="width: 100%;line-height: inherit;">
                         <div v-if=" company == null">
                             <img src="/err.png" alt="" srcset="" style=" width:100px; height:100px; margin:auto; padding:20px;">
                         </div>
@@ -486,7 +488,7 @@
                             <tr>
                             <td colspan="6" style="padding: 5px;vertical-align: top;padding-bottom: 20px;font-size: 45px;line-height: 45px;color: #333; border:none">
                                    
-                                     <div v-if=" company.logo == null"> Noob </div>
+                                     <div v-if=" company.logo == null"> Logo Crack </div>
                                     <div v-else>
                                          <img :src= "`https://fulfilmm.com/img/profiles/` + company.logo" class="" />
                                     </div>
@@ -495,13 +497,13 @@
                            
                            
                             </td>
-                             <td style=" border:none;">
+                             <td  style=" border:none; ">
                                      <h2 style=" font-size: bold; padding:10px">{{invoice.invoice_id}}</h2>
                                 </td>
                         </tr>
       
                                 <tr>
-                                     <td colspan="6" style="padding: 5px; vertical-align: top ;padding-bottom: 20px; font-weight:bold; font-size:small; border:none;">
+                                     <td width="70%" style="padding: 5px; vertical-align: top ;padding-bottom: 20px; font-weight:bold; font-size:small; border:none;">
                                     <h2 style=" color: gray;">{{company.name}} </h2> 
                                     Phone --- {{company.phone}} / {{company.mobile_phone}} <br>
                                      Fax ------- {{company.fax}} <br>
@@ -510,7 +512,7 @@
                                     Address - {{company.address}}
                                     </td>
 
-                                      <td style="padding: 5px; margin-top: 30px; vertical-align: top;padding-bottom: 40px; font-weight:bold; font-size:small; border:none;">
+                                      <td width="30%" align=" right" style="padding: 5px; margin-top: 30px; vertical-align: top;padding-bottom: 40px; font-weight:bold; font-size:small; border:none;">
                                      Name - {{cus.name}}<br>
                                      Phone.No -  {{cus.phone}} <br>
                                      Email -  {{invoice.email}}<br>
@@ -530,35 +532,35 @@
 
                         <tr>
                             <td colspan="8">
-                                <table style="width:100%;line-height: inherit;text-align: center;   padding:5px; font-size:small;">
+                               <table style="box-sizing:border-box; border:1px solid #c8c8c8;" width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <thead>
-                                         <th> Name </th>
-                                        <th> Unit </th> 
-                                        <th> Price </th>
-                                        <th> Quantity  </th>
-                                        <th> Discount </th>
-                                        <th> Total </th>
+                                         <th width="15%" align="center" style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8; border-top:#c8c8c8 1px solid; font-family:Verdana, Geneva, sans-serif; font-size:13px;"> Name </th>
+                                        <th width="15%" align="center" style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8; border-top:#c8c8c8 1px solid; font-family:Verdana, Geneva, sans-serif; font-size:13px;"> Unit </th> 
+                                        <th width="20%" align="center" style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8; border-top:#c8c8c8 1px solid; font-family:Verdana, Geneva, sans-serif; font-size:13px;"> Price </th>
+                                        <th width="15%" align="center" style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8; border-top:#c8c8c8 1px solid; font-family:Verdana, Geneva, sans-serif; font-size:13px;"> Quantity  </th>
+                                        <th width="15%" align="center" style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8; border-top:#c8c8c8 1px solid; font-family:Verdana, Geneva, sans-serif; font-size:13px;"> Discount </th>
+                                        <th width="20%" align="center" style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8; border-top:#c8c8c8 1px solid; font-family:Verdana, Geneva, sans-serif; font-size:13px;"> Total </th>
                                     </thead>
-                                    <tbody v-for="product in items" :key="product.id">
+                                    <tbody v-for="product in items" :key="product.id" style="">
                                 <tr v-if="product.foc == 0 ">
                                 
-                                    <td class="py-3"> {{ product.variant.product_name }}</td>
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center"> {{ product.variant.product_name }}</td>
                                    
-                                    <td class="py-3">
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">
                                         {{product.unit.unit}}
                                     </td>
-                                    <td class="py-3">
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">
                                         {{product.unit_price}}
                                     </td>
 
-                                    <td class="py-3">                           
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">                           
                                         {{ product.quantity}} 
                                     </td>
-                                    <td class="py-3">
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">
                                         {{product.discount_promotion}} %
                                     </td>
                                    
-                                    <td class="py-3">
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">
                                     {{product.total}}
                                     </td>
                                 
@@ -567,20 +569,20 @@
                                 
                                 <tr  v-if="product.foc == 1">
                                 
-                                    <td class="py-3"> {{ product.variant.product_name }}</td>
-                                    <td>                             
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center"> {{ product.variant.product_name }}</td>
+                                   <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">                             
                                                         <div v-for="u in units" :key="u.id">
                                                             <span v-if="u.id == product.sell_unit">{{u.unit}}</span>
                                                         </div>
                                     </td>
-                                    <td style=" font-weight:bold;">
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">
                                         Foc Item
                                     </td>
 
-                                    <td>                           
+                                    <td style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">                           
                                         {{ product.quantity}} 
                                     </td>
-                                    <td colspan="3" style=" font-weight:bold;">
+                                   <td colspan="3" style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">
                                         {{product.description}}
                                     </td>
                                 </tr>
@@ -588,22 +590,22 @@
                             </tbody>
                             <tfoot style=" text-align:right; margin-right:5px;">
                                 <tr>
-                                    <td colspan="4"> Total </td>
-                                    <td colspan="3"> {{ invoice.total}}</td>
+                                    <td colspan="4"  style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="right"> Total </td>
+                                    <td colspan="3"  style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center"> {{ invoice.total}}</td>
                                 </tr>
 
                                 <tr class=" my-2">
-                                    <td colspan="4"> Discount </td>
-                                    <td colspan="3"> {{ invoice.discount}}</td>
+                                    <td colspan="4"  style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="right"> Discount </td>
+                                    <td colspan="3"  style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center"> {{ invoice.discount}}</td>
                                 </tr>
 
                                 <tr class="my-2">
-                                    <td colspan="4"> Tax </td>
-                                    <td colspan="3"> {{ invoice.tax_rate}} %</td>
+                                    <td colspan="4"  style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="right"> Tax </td>
+                                    <td colspan="3"  style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center"> {{ invoice.tax_rate}} %</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4"> Grand Total</td>
-                                    <td colspan="3">{{ invoice.grand_total }}</td>
+                                    <td colspan="4"  style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="right"> Grand Total</td>
+                                    <td colspan="3"  style="border-bottom:1px solid #c8c8c8; border-right:1px solid #c8c8c8;" align="center">{{ invoice.grand_total }}</td>
                                 </tr>
                             </tfoot>
                                    

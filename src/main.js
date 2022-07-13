@@ -8,6 +8,19 @@ import './axios';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+//import VueHtmlToPaper from 'vue-html-to-paper';
+// const o = {
+//         name: '_blank',
+//         specs: [
+//           'fullscreen=yes',
+//           'titlebar=yes',
+//           'scrollbars=yes'
+//         ],
+//         styles: [
+//                 './index.css'
+//         ]
+//       }
+
 
 
 
@@ -29,5 +42,6 @@ createApp(App)
         .use(router)
         .use(VueSweetalert2, options)
         .use(Vue3Geolocation)
+        //.use(VueHtmlToPaper, o)
         .component('master-layout', MasterLayout)
         .mount('#app')

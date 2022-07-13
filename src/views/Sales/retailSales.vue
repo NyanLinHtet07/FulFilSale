@@ -209,7 +209,7 @@
                    <td colspan="6" class="text-right"> Discount </td>
                    <td>
                         <div v-for="cartDis in cartDiscounts" :key="cartDis.id">
-                            <div v-if="cartDis.min_amount < getRetailTotal && cartDis.max_amount > getTotal">
+                            <div v-if="cartDis.min_amount < getRetailTotal && cartDis.max_amount > getRetailTotal">
                                   <select name="" id="" v-model="tax" class=" rounded-md w-3/6 bg-gray-50  px-2 py-2 mx-auto block">
                                     <option :value="cartDis.rate"> {{cartDis.rate}} </option>
                                 </select>

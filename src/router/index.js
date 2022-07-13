@@ -86,7 +86,7 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeResolve((to, from, next) => {
   if( to.path !== '/login'){
     let auth = localStorage.getItem('token')
     if(auth){

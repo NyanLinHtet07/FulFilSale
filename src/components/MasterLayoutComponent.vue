@@ -2,7 +2,7 @@
     <div class="h-screen flex bg-gradient-to-t from-emerald-300/70 to-white">
         <div class="w-64 max-h-full bg-white bg-opacity-80 backdrop-blur-lg border-b border-gray-100 px-3 py-2 rounded-r-3xl  space-y-6
                                              absolute inset-0 left-0 transform -translate-x-full transition duration-400 ease-in-out block"
-                                    :class="{'relative -translate-x-0 transition duration-500': !showSidebar}">
+                                    :class="{' relative -translate-x-0 transition duration-500': !showSidebar}">
             <header class=" mt-5 mb-3">
                 <!-- <h2 class=" font-bold text-2xl text-gray-600"> FulFil</h2> -->
                 <img src="/fulfil.png" alt="fulfil" class=" object-scale-down w-48 mx-auto" />
