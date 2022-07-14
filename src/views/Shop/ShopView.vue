@@ -7,14 +7,14 @@
              <div v-else>
                  <div  class=" mb-14 pb-3">
                     
-                    <div class="fixed top-16 bg-transparent z-30 w-5/6 mx-auto block">
-                        <input type="search" v-model="search" placeholder=" search shops ..." class=" w-4/5 rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2"/> 
-                         <button  type="button" class=" ml-3 inline-block mt-3 px-3 py-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
+                    <div class=" bg-transparent z-30 w-full text-end">
+                        <input type="search" v-model="search" placeholder=" search shops ..." class=" w-5/6 rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2"/> 
+                         <button  type="button" class=" ml-3 inline-block mt-3  mr-6 px-3 py-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
                             Add
                         </button>
                     </div>
                      
-                    <div class=" mt-32">
+                    <div class=" overflow-y-auto">
 
                         <table class="table-auto border-collapse:separate rounded-xl border-0 border-accent w-5/6 my-6 bg-white bg-opacity-40 backdrop-blur-md mx-auto drop-shadow-sm shadow-2xl shadow-sky-200">
                         <thead class=" border-y border-gray-300/60">

@@ -1,10 +1,9 @@
 <template>
     <master-layout pageTitle="WholeSales">
-         <Loader class="" v-if="loading"/>
-        
-       
-        
-       <div class=" mt-6 mx-2" v-else>
+
+        <div>
+             <Loader class="" v-if="loading"/>
+        <div class=" mt-6 mx-2" v-else>
            <div class=" w-full h-screen mx-1" v-if="shop && !cart && !info">
                 <div class=" text-left ml-4 my-2">
                     <button  @click="openItems" class=" text-xs px-3 py-1 mx-2 rounded-full shadow-md text-white bg-emerald-500/70"> Products</button>
@@ -57,7 +56,7 @@
            
                 <!------------------- for invoive ------------------------>
             <div v-if="!shop && cart && !info" >
-            <div class="h-fit mx-1 bg-white/70 p-2 bg-opacity-50 backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg" >
+            <div class="h-fit mx-1 border-none mt-10 bg-white/70 p-2 bg-opacity-50 backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg" >
                     <table class="table-auto my-1 border-none  w-full bg-white bg-opacity-40">
                 <thead class=" border-y border-gray-300/30 bg-white/80">
                     <tr class="text-sm">
@@ -460,6 +459,9 @@
 
             </div>
         </div>
+        </div>
+        
+       
     </master-layout>
    
 </template>
