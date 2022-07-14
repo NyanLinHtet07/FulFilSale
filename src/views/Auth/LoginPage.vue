@@ -1,6 +1,6 @@
 <template>
     <div class=" w-full flex items-center justify-center h-screen bg-gradient-to-b from-white to-emerald-200/70">
-        <div class=" w-5/6 md:w-3/6 p-6 mx-2 rounded-xl bg-white bg-opacity-60 backdrop-blur-lg backdrop-filter">
+        <div class=" w-5/6 md:w-3/6 p-6 mx-2 rounded-xl bg-white bg-opacity-60 backdrop-blur-lg backdrop-filter z-30">
             <img src="/fulfil.png" alt="fulfil" class=" object-scale-down md:w-56 w-48 my-3 mx-auto">
 
             <form @submit.prevent="login">
