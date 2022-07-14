@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   {
     path: '/',
-    redirect:'/select_sales'
+    redirect:'/login'
     // name: 'home',
     // component: HomeView
   },
@@ -86,22 +86,22 @@ const router = createRouter({
   routes
 })
 
-router.beforeResolve((to, from, next) => {
-  if( to.path !== '/login'){
-    let auth = localStorage.getItem('token')
-    if(auth){
-      next();
-    }
+// router.beforeResolve((to, from, next) => {
+//   if( to.path !== '/login'){
+//     let auth = localStorage.getItem('token')
+//     if(auth){
+//       next();
+//     }
 
-    else{
-      next('/login')
-    }
-  }
+//     else{
+//       next('/login')
+//     }
+//   }
 
-  else{
-    next();
-  }
-})
+//   else{
+//     next();
+//   }
+// })
 
 
 

@@ -370,39 +370,48 @@
                             <p v-if="! formCus.phone"  class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Phone Number Require</p>
                     </div>
 
-                        <div class="border-b-2 border-gray-400/30 mb-3">
-                            <label> Shop</label>
-                            <select v-model="formCus.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                                <option v-for="c in companies" :key="c.id" :value=c.id class="text-sm"> {{c.name}}</option>
-                            </select> 
-                            <p v-if="! formCus.company_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Shop</p>
+                     <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Shop</label>
+                        <div>
+                        <select v-model="formCus.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-200">
+                            <option v-for="c in companies" :key="c.id" :value=c.id class="text-sm"> {{c.name}}</option>
+                        </select> 
+                        <p v-if="! formCus.company_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Shop</p>
                         </div>
-                    
-                    <div class="border-b-2 border-gray-400/30 mb-3">
-                            <label>Customer Type</label>
-                            <select v-model="formCus.customer_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                                <option value="customer" class="text-sm"> Customer </option>
-                            </select>
-                            <p v-if="! formCus.customer_type" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Type</p>
                     </div>
+                
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm">Customer Type</label>
+                        <div>
+                        <select v-model="formCus.customer_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-200">
+                            <option value="customer" class="text-sm"> Customer </option>
+                        </select>
+                        <p v-if="! formCus.customer_type" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Type</p>
+                        </div>
+                </div>
 
-                    <div class="border-b-2 border-gray-400/30 mb-3">
-                            <label> Gender</label>
-                            <select v-model="formCus.gender" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                                <option value="male" class=" text-sm"> Male </option>
-                                <option value="female" class=" text-sm"> Female </option>
-                            </select>
-                            <p v-if="! formCus.gender" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Gender</p>
-                    </div>
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Gender</label>
+                        <div>
+                        <select v-model="formCus.gender" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-200">
+                            <option value="male" class=" text-sm"> Male </option>
+                            <option value="female" class=" text-sm"> Female </option>
+                        </select>
+                        <p v-if="! formCus.gender" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Gender</p>
+                        </div>
+                </div>
 
-                    <div class="border-b-2 border-gray-400/30 mb-3">
-                            <label> Zone</label>
-                            <select v-model="formCus.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
-                                <option v-for="z in zones" :key="z.id" :value=z.id class="text-sm"> {{z.name}} </option>
-                                
-                            </select>
-                            <small v-if="! formCus.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</small>
-                    </div>
+
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Zone</label>
+                        <div>
+                        <select v-model="formCus.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-200">
+                            <option v-for="z in zones" :key="z.id" :value=z.id class="text-sm"> {{z.name}} </option>
+                            
+                        </select>
+                        <p v-if="! formCus.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</p>
+                        </div>
+                </div>
                     <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                                 <button class="py-1 px-3  rounded-lg mx-2 bg-red-800 text-white" type="button" v-on:click="toggleModal()">
                                 Close
@@ -498,7 +507,7 @@
                 <!------------------- for invoive ------------------------>
             <div v-if="!shop && cart && !info" >
             <div class="h-fit mx-1 border-none mt-10 bg-white/70 p-2 bg-opacity-50 backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg" >
-                    <table class="table-auto my-1 border-none  w-full bg-white bg-opacity-40">
+                    <table class="table-auto my-1 border-none  w-full bg-white bg-opacity-40 mb-20">
                 <thead class=" border-y border-gray-300/30 bg-white/80">
                     <tr class="text-sm">
                     <th class=" py-2 font-thin">No</th>
@@ -832,38 +841,47 @@
                         <p v-if="! formCus.phone"  class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Phone Number Require</p>
                 </div>
 
-                    <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label> Shop</label>
-                        <select v-model="formCus.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                    <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Shop</label>
+                        <div>
+                        <select v-model="formCus.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-200">
                             <option v-for="c in companies" :key="c.id" :value=c.id class="text-sm"> {{c.name}}</option>
                         </select> 
                         <p v-if="! formCus.company_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Shop</p>
+                        </div>
                     </div>
                 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label>Customer Type</label>
-                        <select v-model="formCus.customer_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm">Customer Type</label>
+                        <div>
+                        <select v-model="formCus.customer_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-200">
                             <option value="customer" class="text-sm"> Customer </option>
                         </select>
                         <p v-if="! formCus.customer_type" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Type</p>
+                        </div>
                 </div>
 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label> Gender</label>
-                        <select v-model="formCus.gender" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Gender</label>
+                        <div>
+                        <select v-model="formCus.gender" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-200">
                             <option value="male" class=" text-sm"> Male </option>
                             <option value="female" class=" text-sm"> Female </option>
                         </select>
                         <p v-if="! formCus.gender" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Gender</p>
+                        </div>
                 </div>
 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label> Zone</label>
-                        <select v-model="formCus.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Zone</label>
+                        <div>
+                        <select v-model="formCus.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-slate-200">
                             <option v-for="z in zones" :key="z.id" :value=z.id class="text-sm"> {{z.name}} </option>
                             
                         </select>
-                        <small v-if="! formCus.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</small>
+                        <p v-if="! formCus.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</p>
+                        </div>
                 </div>
                   <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                             <button class="py-1 px-3  rounded-lg mx-2 bg-red-800 text-white" type="button" v-on:click="toggleModal()">

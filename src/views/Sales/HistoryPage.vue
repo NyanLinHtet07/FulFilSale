@@ -5,8 +5,14 @@
         </div>
        <div v-else>
            
-                <input type="search" v-model="search" placeholder=" search invoice ..." class="rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2 mt-2 z-30 w-4/5 sticky top-16" animated /> 
-          
+                <input type="search" v-model="search" placeholder=" search invoice id ..." class="rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2 mt-2 z-30 w-4/5 sticky top-16" animated /> 
+                <!-- <div class=" block">
+                     <select name="" id="" v-model="search" class=" px-2 py-1 rounded-xl bg-white/60 backdrop-blur-md">
+                        <option value="Whole Sale" class="px-2 py-1 rounded-xl bg-white/90">Whole Sale</option>
+                        <option value="Retail Sale" class="px-2 py-1 rounded-xl bg-white/90">Retail Sale</option>
+                    </select>
+                </div> -->
+               
                <table class="table-auto overflow-x-scroll border-collapse:separate rounded-xl border-0 border-accent w-5/6 my-6 bg-white bg-opacity-40 backdrop-blur-md mx-auto drop-shadow-lg shadow-2xl shadow-sky-200">
                         <thead class=" border-y border-gray-300/60">
                             <tr>
@@ -182,6 +188,7 @@ export default {
         filteredInvoice(){
             return this.posts.filter((post) => {
                 return post.invoice_id.toLowerCase().match(this.search.toLowerCase())
+                       // post.inv_type.toLowerCase().match(this.search.toLowerCase())
             })
         }
 

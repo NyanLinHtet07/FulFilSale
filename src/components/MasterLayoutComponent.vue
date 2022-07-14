@@ -54,7 +54,7 @@
 
 
         <div class="flex-1 overflow-y-auto h-screen">
-            <div class=" py-3 px-2 rounded-md bg-white backdrop-blur-lg mb-2  mx-2
+            <div class=" py-3 px-2 rounded-xl bg-white backdrop-blur-lg mb-2  mx-2
                          border-2 border-emerald-200/20 flex justify-between sticky top-0 z-30">
                      <button  @click=" showSidebar = !showSidebar" class=" hover:bg-slate-200/10 hover:rounded-full hover:drop-shadow-lg hover:transition hover:delay-200 p-2">  <MenuIcon/> </button>
                      <!-- <MenuIcon @click="openMenu()" v-if="! menu" 

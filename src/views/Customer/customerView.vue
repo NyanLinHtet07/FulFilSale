@@ -68,7 +68,7 @@
            
 
             <div v-if="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-                    <div class="relative w-auto my-6 mx-auto max-w-2xl w-xl">
+                    <div class="relative w-auto my-6 mx-auto max-w-2xl w-xl px-6">
                         <!--content-->
                         <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                         <!--header-->
@@ -105,38 +105,46 @@
                         <p v-if="! form.phone"  class=" text-xs text-ellipsis text-left mr-3 mt-2 text-red-800 font-semibold">Customer Phone Number Require</p>
                 </div>
 
-                    <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label> Shop</label>
-                        <select v-model="form.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                    <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Shop</label>
+                        <div>
+                        <select v-model="form.company_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-gray-200">
                             <option v-for="c in company" :key="c.id" :value=c.id class="text-sm"> {{c.name}}</option>
                         </select> 
                         <p v-if="! form.company_id" class=" text-xs text-ellipsis text-red-800  font-semibold">Please Select Shop</p>
+                        </div>
                     </div>
                 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label>Customer Type</label>
-                        <select v-model="form.customer_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm">Customer Type</label>
+                        <div>
+                        <select v-model="form.customer_type"  class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-gray-200">
                             <option value="customer" class="text-sm"> Customer </option>
                         </select>
                         <p v-if="! form.customer_type" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Type</p>
+                        </div>
                 </div>
 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label> Gender</label>
-                        <select v-model="form.gender" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Gender</label>
+                        <div>
+                        <select v-model="form.gender" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-gray-200">
                             <option value="male" class=" text-sm"> Male </option>
                             <option value="female" class=" text-sm"> Female </option>
                         </select>
                         <p v-if="! form.gender" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Gender</p>
+                        </div>
                 </div>
 
-                <div class="border-b-2 border-gray-400/30 mb-3">
-                        <label> Zone</label>
-                        <select v-model="form.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm">
+                <div class="border-b-2 border-gray-400/30 mb-3 text-left flex justify-between">
+                        <label class=" text-sm"> Zone</label>
+                        <div>
+                        <select v-model="form.zone_id" class=" px-2 py-1 rounded-md ml-2 w-28 text-sm bg-gray-200">
                             <option v-for="z in zone" :key="z.id" :value=z.id class="text-sm"> {{z.name}} </option>
                             
                         </select>
-                        <small v-if="! form.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</small>
+                        <p v-if="! form.zone_id" class=" text-xs text-ellipsis text-red-800 font-semibold">Please Select Zone</p>
+                        </div>
                 </div>
                   <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                             <button class="py-1 px-3  rounded-lg mx-2 bg-red-800 text-white" type="button" v-on:click="toggleModal()">
