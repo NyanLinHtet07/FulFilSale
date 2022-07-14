@@ -5,7 +5,7 @@
         </div>
        <div v-else>
            
-                <input type="search" v-model="search" placeholder=" search invoice ..." class=" w-4/5 rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2" animated /> 
+                <input type="search" v-model="search" placeholder=" search invoice ..." class="rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2 mt-2 z-30 w-4/5 sticky top-16" animated /> 
           
                <table class="table-auto overflow-x-scroll border-collapse:separate rounded-xl border-0 border-accent w-5/6 my-6 bg-white bg-opacity-40 backdrop-blur-md mx-auto drop-shadow-lg shadow-2xl shadow-sky-200">
                         <thead class=" border-y border-gray-300/60">

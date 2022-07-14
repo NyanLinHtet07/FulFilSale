@@ -17,11 +17,11 @@
 
             
 
-                    <div class=" flex justify-center mx-2 mt-3 mb-5">
-                         <input type="search" v-model="search" placeholder=" search customers ..."  class=" bg-white rounded-full px-2 w-4/5 h-9 drop-shadow-lg ml-5 mr-3 mt-2"/> 
+                    <div class="bg-transparent z-30 w-full sticky top-16 text-end">
+                         <input type="search" v-model="search" placeholder=" search customers ..."  class=" bg-white rounded-full px-2 py-1 w-4/6 md:w-5/6 h-9 drop-shadow-lg ml-3 mr-5"/> 
 
                         
-                            <button  type="button" class=" mr-5 ml-3 inline-block mt-3 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
+                            <button  type="button" class=" mr-5 ml-3 inline-block mt-4 p-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
                             <PersonAddIcon/>
                             </button>
                       

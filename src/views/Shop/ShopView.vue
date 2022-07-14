@@ -7,8 +7,8 @@
              <div v-else>
                  <div  class=" mb-14 pb-3">
                     
-                    <div class=" bg-transparent z-30 w-full text-end">
-                        <input type="search" v-model="search" placeholder=" search shops ..." class=" w-5/6 rounded-xl drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2"/> 
+                    <div class=" bg-transparent z-30 w-full sticky top-16 text-end">
+                        <input type="search" v-model="search" placeholder=" search shops ..." class=" w-4/6 md:w-5/6 rounded-full drop-shadow-lg shadow-emerald-200 py-2 px-3 mb-3 mx-2"/> 
                          <button  type="button" class=" ml-3 inline-block mt-3  mr-6 px-3 py-1 rounded-full bg-emerald-600/80 text-white drop-shadow-lg shadow-lg shadow-emerald-400" v-on:click="toggleModal()" > 
                             Add
                         </button>
@@ -37,6 +37,7 @@
                                 <div  v-if="shop.picture == null" alt="" class="object-scale-down h-10 w-10 p-1 rounded mx-auto">
                                     <ShopIcon/>
                                 </div>
+                              
                                 <img :src="`https://fulfilmm.com/img/profiles/` + shop.picture" v-else alt="" srcset="" class="object-scale-down h-10 w-10 p-1 rounded-md mx-auto">
 
                             </td>
