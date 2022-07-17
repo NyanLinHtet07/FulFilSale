@@ -1,7 +1,9 @@
 <template>
     <div class="h-screen flex bg-gradient-to-t from-emerald-300/70 to-white">
-        <div class="w-64 max-h-full bg-white bg-opacity-80 backdrop-blur-lg border-b border-gray-100 px-3 py-2 rounded-r-3xl  space-y-6
-                                             absolute inset-0 left-0 transform -translate-x-full transition duration-400 ease-in-out block"
+     
+     <!-------------------  for large screen nav -------------------------->
+        <div class="  hidden md:block h-screen w-64 max-h-full bg-white bg-opacity-80 backdrop-blur-lg border-b border-gray-100 px-3 py-2 rounded-r-3xl  space-y-6
+                                             absolute inset-0 left-0 transform -translate-x-full transition duration-400 ease-in-out"
                                     :class="{' relative -translate-x-0 transition duration-500': !showSidebar}">
             <header class=" mt-5 mb-3">
                 <!-- <h2 class=" font-bold text-2xl text-gray-600"> FulFil</h2> -->
@@ -51,6 +53,60 @@
                 </div>
             </nav>
         </div>
+
+<!---------------------- for small screen nav --------------------------------->
+         <div class=" block md:hidden h-screen w-64 max-h-full bg-white bg-opacity-80 backdrop-blur-lg border-b border-gray-100 px-3 py-2 rounded-r-3xl  space-y-6
+                                             absolute inset-0 left-0 transform -translate-x-full transition duration-400 ease-in-out"
+                                    :class="{' relative -translate-x-0 transition duration-500': showSidebar}">
+            <header class=" mt-5 mb-3">
+                <!-- <h2 class=" font-bold text-2xl text-gray-600"> FulFil</h2> -->
+                <img src="/fulfil.png" alt="fulfil" class=" object-scale-down w-48 mx-auto" />
+            </header>
+           <nav>
+                <!-- <div class="border-b-2 border-gray-200 py-2 ">
+                   <router-link to="/" class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <HomeIcon class=" ml-2 mr-5"/> <p> Home </p>
+                    </router-link> 
+                </div> -->
+
+                 <div class="border-b-2 border-gray-200 py-2">
+                   <router-link to="/select_sales" class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <CartIcon class=" ml-2 mr-5"/> <p> Sales </p>
+                    </router-link>  
+                </div>
+
+                 <div class="border-b-2 border-gray-200 py-2">
+                   <router-link to='/history' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <SaleHistoryIcon class=" ml-2 mr-5"/> <p> Sale History </p>
+                    </router-link>  
+                </div>
+
+                 <div class="border-b-2 border-gray-200 py-2">
+                   <router-link to='/customers' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <CustomerIcon class=" ml-2 mr-5"/> <p> Customers </p>
+                    </router-link>  
+                </div>
+
+                <div class="border-b-2 border-gray-200 py-2">
+                   <router-link to='/shop' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <ShopIcon class=" ml-2 mr-5"/> <p> Shops </p>
+                    </router-link>  
+                </div>
+
+                <div class="border-b-2 border-gray-200 py-2">
+                   <a href='https://fulfilmm.com/employee/login' class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700">
+                     <LinkIcon class=" ml-2 mr-5"/> <p> Back Office </p>
+                    </a>  
+                </div>
+
+                 <div class="border-b-2 border-gray-200 py-2">
+                   <div class="flex justify-start transition ease-in-out delay-150 relative font-thin text-gray-700"  @click="logout()">
+                     <LogoutIcon class=" ml-2 mr-5"/> <p> Logout </p>
+                    </div> 
+                </div>
+            </nav>
+        </div>
+     
 
 
         <div class="flex-1 overflow-y-auto h-screen">
